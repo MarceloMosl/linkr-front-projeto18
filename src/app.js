@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { SearchUser } from "./components/searchUser.js";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<div>Oi</div>} />
+        <Route path="/user/:id" element={<SearchUser />} />
       </Routes>
     </BrowserRouter>
   );
