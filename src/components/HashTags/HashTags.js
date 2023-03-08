@@ -29,7 +29,7 @@ export default function HashTagsList(){
     return(
         <HashTagsContainer>
             {hashTags.map( h => (
-                <HashTags onClick={() => handleHashTagClick(h.name)}>
+                <HashTags onClick={() => handleHashTagClick(h.name)} data-test="hashtag">
                     <span># {h.name}</span>
                 </HashTags>
             ))}
