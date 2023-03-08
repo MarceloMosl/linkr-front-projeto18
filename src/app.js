@@ -2,13 +2,18 @@ import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchUser } from "./components/searchUser.js";
+import { SignUp } from "./pages/SignUpPage/SignUpPage.js";
+import { Login } from "./pages/SignInPage/SignInPage.js";
+
+
 
 function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<div>Oi</div>} />
+	  <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/" element={<Login />} />
         <Route path="/user/:id" element={<SearchUser />} />
       </Routes>
     </BrowserRouter>
