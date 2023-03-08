@@ -23,4 +23,9 @@ export const TrendingContainer = styled.div`
     border: 1px solid #484848;
     margin-bottom:22px;
   }
+
+  @media (min-width:375px) {
+    display:none;
+
+  }
 `;

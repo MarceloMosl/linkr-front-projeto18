@@ -21,16 +21,16 @@ export default function HashTagsList(){
 
         }
 
-        function handleHashTagClick(){
-            navigate("/hashtag/:")
+        function handleHashTagClick(clickedHashtag){
+            navigate(`/hashtag/${clickedHashtag}`)
         }
     }
 
     return(
         <HashTagsContainer>
             {hashTags.map( h => (
-                <HashTags onClick={() => handleHashTagClick()}>
-                    <span># {}</span>
+                <HashTags onClick={() => handleHashTagClick(h.name)}>
+                    <span># {h.name}</span>
                 </HashTags>
             ))}
         </HashTagsContainer>
