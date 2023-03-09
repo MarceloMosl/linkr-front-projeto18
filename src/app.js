@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SearchUser } from "./components/searchUser.js";
+import { UserPage } from "./pages/userPage/userPage.js";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<div>Oi</div>} />
-        <Route path="/user/:id" element={<SearchUser />} />
+        <Route path="/user/:id" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
   );
