@@ -18,17 +18,5 @@ export function UserPage() {
     promise.catch((err) => alert(err));
   }, []);
 
-  const [searchBar, setsearchBar] = React.useState("");
-
-  if (searchBar.length >= 3) {
-    const promise = axios.post("http://localhost:5000/srcuser", {
-      username: `%${searchBar}%`,
-    });
-
-    promise.then((res) => console.log(res));
-  }
-
-  return (
-    <SearchUser user={user} userPosts={userPosts} setsearchBar={setsearchBar} />
-  );
+  return <SearchUser user={user} userPosts={userPosts} />;
 }
