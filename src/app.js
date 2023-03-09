@@ -9,7 +9,6 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path="/user/:id" element={<UserPage />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/" element={<Login />} />
         <Route path="/user/:id" element={<UserPage />} />
