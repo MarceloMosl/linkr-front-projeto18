@@ -6,6 +6,7 @@ import { SignUp } from "./pages/SignUpPage/SignUpPage.js";
 import { Login } from "./pages/SignInPage/SignInPage.js";
 
 
+import { Timeline } from "./pages/TimelinePage/TimelinePage.js";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 	  <Route path="/sign-up" element={<SignUp />} />
         <Route path="/" element={<Login />} />
         <Route path="/user/:id" element={<SearchUser />} />
+		<Route path="/timeline" element={<Timeline />}/>
       </Routes>
     </BrowserRouter>
   );
