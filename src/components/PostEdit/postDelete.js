@@ -5,6 +5,7 @@ import axios from "axios";
 
 
 function PostDelete(id) {
+	const token = localStorage.getItem('token');
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const iconRef = useRef(null);
 
@@ -12,9 +13,8 @@ function PostDelete(id) {
 		setIsModalOpen(true);
 	};
 
-
     const handleDeleteClick = () => {
-        const header = { headers: { Authorization: `Bearer ${"usertoken"}` } };
+        const header = { headers: { Authorization: `Bearer ${token}` } };
         const deletePrommise = axios.delete(`${process.env.REACT_APP_API_URL}/posts/${id}`, header);
         deletePrommise.then(success => {
                     console.log(success)

@@ -4,7 +4,6 @@ import PostEdit from "./PostEdit/postEdit";
 import PostDelete from "./PostEdit/postDelete";
 import { useState } from "react";
 import EditForm from "./PostEdit/editForm";
-import axios from "axios";
 
 
 
@@ -80,7 +79,7 @@ const Post = styled.div`
 	padding-bottom: 20px;
 	padding-right: 21px;
 	box-sizing: border-box;
-	margin-top: 16px;
+	margin-top: 76px;
 	position: relative;
 `;
 const OpPfp = styled.img`

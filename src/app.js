@@ -23,9 +23,8 @@ function App() {
       <Routes>
 	  <Route path="/sign-up" element={<SignUp />} />
         <Route path="/" element={<Login />} />
-		
         <Route path="/user/:id" element={<SearchUser />} />
-
+		<Route path="/timeline" element={<Timeline />}/>
 		
       </Routes>
 	  </UserContext.Provider>
