@@ -4,15 +4,38 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserPage } from "./pages/userPage/userPage.js";
 import { SignUp } from "./pages/SignUpPage/SignUpPage.js";
 import { Login } from "./pages/SignInPage/SignInPage.js";
+import { Timeline } from "./pages/TimelinePage/TimelinePage.js";
+import UserContext from "./contexts/UserContext.js";
+import { useState } from "react";
+import Header from "./components/Header/Header.js";
+
 function App() {
+  const [logado, setLogado] = useState(
+    JSON.parse(localStorage.getItem("token"))
+  );
+  const [imgUser, setImgUser] = useState("");
+  const [headerStatus, setHeaderStatus] = useState(false);
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <Routes>
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/" element={<Login />} />
-        <Route path="/user/:id" element={<UserPage />} />
-      </Routes>
+      <UserContext.Provider
+        value={{
+          logado,
+          setLogado,
+          imgUser,
+          setImgUser,
+          headerStatus,
+          setHeaderStatus,
+        }}
+      >
+        <Header />
+        <Routes>
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/user/:id" element={<UserPage />} />
+          <Route path="/timeline" element={<Timeline />} />
+        </Routes>
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }
