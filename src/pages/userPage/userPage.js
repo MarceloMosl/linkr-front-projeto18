@@ -5,12 +5,15 @@ export function UserPage() {
   const [userPosts, setUsersPosts] = React.useState([
     { headline: "", post_url: "" },
   ]);
+  const token = localStorage.getItem("token");
   const [user, setUser] = React.useState([]);
+  const header = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
-    const promise = axios.get("http://localhost:5000/user/1", {
-      headers: { Authorization: `Bearer ${"1234"}` },
-    });
+    const promise = axios.get(
+      `${process.env.REACT_APP_API_URL}/user/1`,
+      header
+    );
     promise.then((res) => {
       setUsersPosts(res.data[0]);
       setUser(res.data[1][0]);

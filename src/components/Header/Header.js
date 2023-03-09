@@ -17,7 +17,7 @@ export default function Header() {
   const [searchBar, setsearchBar] = React.useState("");
 
   if (searchBar.length >= 3) {
-    const promise = axios.post("http://localhost:5000/srcuser", {
+    const promise = axios.post(`${process.env.REACT_APP_API_URL}/srcuser`, {
       username: `%${searchBar}%`,
     });
 
