@@ -8,19 +8,26 @@ import { useNavigate } from "react-router-dom";
 export function Login () {
     const navigate = useNavigate();
     const URL = "http://localhost:5000/"
-
+    
 
 
     const [logar, setLogar] = useState(
         {email:'', 
         password:''});
 
+        const { email, password } = logar;
+
+
         function log(event) {
             event.preventDefault();
 
+            if (email === "" || password === "") {
+                return alert("Por favor, preencha todos os dados!");
+              }
         
             const promise = axios.post(`${URL}`, logar);
             promise.then((res) => {
+                localStorage.setItem("token", JSON.stringify(res.data));
                 alert("Usuário logado com sucesso!")
                 navigate("/timeline");
             });

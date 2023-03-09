@@ -4,18 +4,31 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchUser } from "./components/searchUser.js";
 import { SignUp } from "./pages/SignUpPage/SignUpPage.js";
 import { Login } from "./pages/SignInPage/SignInPage.js";
+import UserContext from "./contexts/UserContext.js";
+import { useState } from "react";
+import Header from "./components/Header/Header.js";
+
 
 
 
 function App() {
+	const [logado, setLogado] = useState(JSON.parse(localStorage.getItem("token")));
+	const [imgUser, setImgUser] = useState('');
+	const [headerStatus, setHeaderStatus] = useState(false);
   return (
     <BrowserRouter>
       <GlobalStyle />
+	  <UserContext.Provider value={{logado, setLogado, imgUser, setImgUser, headerStatus, setHeaderStatus}}>
+	  <Header />
       <Routes>
 	  <Route path="/sign-up" element={<SignUp />} />
         <Route path="/" element={<Login />} />
+		
         <Route path="/user/:id" element={<SearchUser />} />
+
+		
       </Routes>
+	  </UserContext.Provider>
     </BrowserRouter>
   );
 }
