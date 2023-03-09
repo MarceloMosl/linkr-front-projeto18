@@ -18,9 +18,6 @@ export function Login () {
         function log(event) {
             event.preventDefault();
 
-            
-            
-    
         
             const promise = axios.post(`${URL}`, logar);
             promise.then((res) => {
@@ -75,10 +72,10 @@ export function Login () {
 
                 <button
                 type="submit"
-                data-test="sign-up-btn">
+                data-test="login-btn">
                 Log In</button>
                 </form>
-                <p data-test="login-link" onClick={() => navigate("/sign-up")} >
+                <p data-test="sign-up-link" onClick={() => navigate("/sign-up")} >
                 First time? Create an account!
                 </p>
 
