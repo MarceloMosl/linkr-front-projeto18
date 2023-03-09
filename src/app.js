@@ -2,10 +2,10 @@ import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchUser } from "./components/searchUser.js";
+
+import { Timeline } from "./pages/TimelinePage/TimelinePage.js";
 import { SignUp } from "./pages/SignUpPage/SignUpPage.js";
 import { Login } from "./pages/SignInPage/SignInPage.js";
-
-
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
 	  <Route path="/sign-up" element={<SignUp />} />
         <Route path="/" element={<Login />} />
         <Route path="/user/:id" element={<SearchUser />} />
+		<Route path="/timeline" element={<Timeline />}/>
       </Routes>
     </BrowserRouter>
   );
