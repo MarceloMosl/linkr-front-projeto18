@@ -2,13 +2,13 @@ import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SearchUser } from "./components/searchUser.js";
+
+import { Timeline } from "./pages/TimelinePage/TimelinePage.js";
 import { SignUp } from "./pages/SignUpPage/SignUpPage.js";
 import { Login } from "./pages/SignInPage/SignInPage.js";
 import UserContext from "./contexts/UserContext.js";
 import { useState } from "react";
 import Header from "./components/Header/Header.js";
-
-
 
 
 function App() {
