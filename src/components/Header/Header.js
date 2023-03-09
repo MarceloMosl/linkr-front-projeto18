@@ -24,7 +24,7 @@ export default function Header() {
     promise.then((res) => console.log(res));
   }
 
-  if (headerStatus === false) {
+  if (headerStatus === true) {
     return (
       <>
         <Container>

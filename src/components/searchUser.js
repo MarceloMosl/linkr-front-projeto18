@@ -4,42 +4,49 @@ export function SearchUser({ userPosts, user }) {
   return (
     <All>
       <section>
-        <OpPfp src={user.user_url} />
+        <img src={user.user_url} />
         <span>{user.username}'s posts</span>
       </section>
 
-      <Post>
-        <LikePfp>
-          <OpPfp src={user.user_url} />
-          <ion-icon name="heart-outline" size="small"></ion-icon>
-          <Like>X LIKES</Like>
-        </LikePfp>
-        <PostText>
-          <OpName>{user.username}</OpName>
-
-          <PostMessage>{userPosts[0].headline}</PostMessage>
-        </PostText>
-      </Post>
+      {userPosts.length === 0
+        ? ""
+        : userPosts.map((a) => (
+            <Post>
+              <LikePfp>
+                <OpPfp src={user.user_url} />
+                <ion-icon name="heart-outline" size="small"></ion-icon>
+                <Like>X LIKES</Like>
+              </LikePfp>
+              <PostText>
+                <OpName>{user.username}</OpName>
+                <PostMessage>{a.headline}</PostMessage>
+              </PostText>
+            </Post>
+          ))}
     </All>
   );
 }
 
 const All = styled.div`
-  background-color: grey;
+  background-color: #4d4d4d;
   min-height: 100vh;
 
   section {
     display: flex;
     width: 611px;
     margin: auto;
-    height: 20px;
     font-weight: 700;
     font-size: 43px;
     color: white;
     padding-top: 150px;
     margin-bottom: 41px;
-
-    align-items: baseline;
+    align-items: center;
+    gap: 5px;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
   }
 `;
 
