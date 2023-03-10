@@ -5,6 +5,18 @@ import PostDelete from "./PostEdit/postDelete";
 import { useState } from "react";
 import EditForm from "./PostEdit/editForm";
 
+const testObj = [{
+	id:"1", 
+	user_id:"1", 
+	username:"Brosuke", 
+	user_url:"https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg",
+	headline:"React",
+	hashstags_name: ["React"],
+	hashtags_id: [1],
+	post_url:"https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg",
+	total_likes:"420",
+	usuario_logado_like: true
+}]
 
 
 export default function DisplayPost() {
