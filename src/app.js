@@ -10,7 +10,6 @@ import UserContext from "./contexts/UserContext.js";
 import { useState } from "react";
 import Header from "./components/Header/Header.js";
 
-
 function App() {
   const [logado, setLogado] = useState("");
   const [imgUser, setImgUser] = useState("");

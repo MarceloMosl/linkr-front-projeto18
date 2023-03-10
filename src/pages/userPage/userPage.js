@@ -7,6 +7,7 @@ export function UserPage() {
   const [userPosts, setUsersPosts] = React.useState([
     { headline: "", post_url: "", user_url: "" },
   ]);
+
   const token = localStorage.getItem("token");
   const header = { headers: { Authorization: `Bearer ${token}` } };
   const { id } = useParams();

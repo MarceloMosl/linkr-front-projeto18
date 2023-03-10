@@ -23,8 +23,9 @@ export default function Header() {
         username: `%${searchBar}%`,
       });
 
-      promise.then((res) => setUserResult(res.data));
-      console.log(searchBar);
+      promise.then((res) => {
+        setUserResult(res.data);
+      });
     }
   }, [searchBar]);
 

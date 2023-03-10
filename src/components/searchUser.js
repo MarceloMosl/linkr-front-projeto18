@@ -6,7 +6,6 @@ export function SearchUser({ userPosts }) {
   const { setHeaderStatus } = useContext(UserContext);
   const [isLiked, setIsLiked] = React.useState("white");
   setHeaderStatus(true);
-  console.log(userPosts);
 
   if (userPosts.username !== undefined) {
     return (
@@ -67,6 +66,7 @@ export function SearchUser({ userPosts }) {
 const All = styled.div`
   background-color: #4d4d4d;
   min-height: 100vh;
+  gap: 20px;
 
   section {
     display: flex;
