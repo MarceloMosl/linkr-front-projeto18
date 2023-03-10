@@ -5,6 +5,8 @@ export const TrendingContainer = styled.div`
   height: 406px;
   background: #171717;
   border-radius: 16px;
+  margin-top:76px;
+  margin-left:26px;
 
   h1 {
     font-family: "Oswald";
@@ -24,8 +26,8 @@ export const TrendingContainer = styled.div`
     margin-bottom:22px;
   }
 
-  @media (min-width:375px) {
+  /* @media (min-width:375px) {
     display:none;
 
-  }
+  } */
 `;

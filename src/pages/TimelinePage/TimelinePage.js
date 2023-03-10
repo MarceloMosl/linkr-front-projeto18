@@ -2,7 +2,9 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import DisplayPost from "../../components/post.js";
-
+import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
+import { TimeLineContainer } from "./styled.js";
+import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.js";
 
 /*
 const url = 'https://www.google.com';
@@ -12,24 +14,21 @@ urlMetadata(url).then(metadata => {
 }
 )
 */
+export function Timeline() {
+  return (
+    <TimeLineContainer>
+      <TimelineHeader/>
+      <PostArea>
+        <DisplayPost></DisplayPost>
+      </PostArea>
+      <TrendingCard />
+    </TimeLineContainer>
+  );
+}
 
 const PostArea = styled.div`
-display: flex;
-width: 100%;
-height: 900px;
-flex-direction: column;
-justify-content: flex-start;
-align-items: center;
-background-color: #4D4D4D;
-box-sizing: border-box;
-`
-export function Timeline(){
-    
-    return (
-    <PostArea>
-        <DisplayPost>
-        </DisplayPost>
-    </PostArea>
-    );
-};
-
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`;
