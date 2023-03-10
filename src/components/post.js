@@ -1,31 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import PostDelete from "./PostEdit/postDelete";
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import { IoPencil } from "react-icons/io5";
 import axios from "axios";
 
-const testObj = [
-	{
-		id: "1",
-		user_id: "1",
-		username: "Brosuke",
-		user_url:
-			"https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg",
-		headline: "React",
-		hashstags_name: ["React"],
-		hashtags_id: [1],
-		post_url:
-			"https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg",
-		total_likes: "420",
-		usuario_logado_like: true,
-	},
-];
+
+
 
 export default function DisplayPost() {
+
+
 	const token = localStorage.getItem("token");
 	const [editingPostId, setEditingPostId] = useState(null);
 	const [editedMessage, setEditedMessage] = useState("");
+	const [timelineContent, setTimelineContent] = useState([]);
+	const [isResponseEdited, setIsResponseEdited] = useState("");
+	const [isPostDeleted, setIsPostDeleted] = useState(false);
+
+	useEffect(() => {
+		const URL = `${process.env.REACT_APP_API_URL}/timeline`;
+		const header = { headers: { Authorization: `Bearer ${token}` } };
+		const getRegistry = axios.get(URL, header);
+		getRegistry.then((response) => {
+			setTimelineContent(response.data);
+		});
+		getRegistry.catch((error) => {
+		console.log(error)
+		});
+	
+	}, [setTimelineContent, isResponseEdited, isPostDeleted]);
+
+
 
 	function handleEditClick(postId) {
 		if (postId === editingPostId) {
@@ -33,7 +39,7 @@ export default function DisplayPost() {
 			setEditedMessage("");
 		} else {
 			setEditingPostId(postId);
-			setEditedMessage(testObj.find(obj => obj.id === postId).headline);
+			setEditedMessage(timelineContent.find(obj => obj.id === postId).headline);
 		}
 	}
 
@@ -52,7 +58,6 @@ export default function DisplayPost() {
 	}
 
 	function handleEditSubmit(event, postId) {
-		event.preventDefault();
 		const data = { headline: editedMessage };
 		const header = { headers: { Authorization: `Bearer ${token}` } };
 		const updatePromise = axios.patch(
@@ -61,7 +66,8 @@ export default function DisplayPost() {
 			header
 		);
 		updatePromise.then((success) => {
-			console.log(success);
+			console.log(success)
+			setIsResponseEdited(success.data);
 		});
 		updatePromise.catch((error) => {
 			alert(error);
@@ -72,7 +78,7 @@ export default function DisplayPost() {
 
 	return (
 		<div>
-			{testObj.map((obj) => (
+			{timelineContent.map((obj) => (
 				<Post key={obj.id} postId ={obj.id}>
 					<LikePfp>
 						<OpPfp src={obj.user_url} />
@@ -99,7 +105,7 @@ export default function DisplayPost() {
 					</PostText>
 					<IconHolder>
 						<PencilIcon onClick={() => handleEditClick(obj.id)} />
-						<PostDelete id={obj.id} />
+						<PostDelete id={obj.id} setIsPostDeleted = {setIsPostDeleted} isPostDeleted= {isPostDeleted}/>
 					</IconHolder>
 				</Post>
 			))}
@@ -172,12 +178,19 @@ const IconHolder = styled.div`
 `;
 
 const EditInput = styled.form`
-	width: 490px;
-	background: #ffffff;
-	border-radius: 7px;
-	border: none;
-	padding: 10px 0px 10px 10px;
-	margin: 15px 0px;
+  width: 490px;
+  background: #FFFFFF;
+  border-radius: 7px;
+  border: none;
+  margin: 15px 0px;
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    border: none;
+    border-radius: 7px;
+  }
 `;
 
 const PencilIcon = styled(IoPencil)`
