@@ -2,7 +2,10 @@ import React, { useContext } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import DisplayPost from "../../components/post.js";
-import UserContext from "../../contexts/UserContext.js";
+import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
+import { TimeLineBox, TimeLineContainer } from "./styled.js";
+import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.js";
+import { CreateNewPost } from "../../components/CreateNewPost/CreateNewPost.js";
 
 /*
 const url = 'https://www.google.com';
@@ -12,6 +15,20 @@ urlMetadata(url).then(metadata => {
 }
 )
 */
+export function Timeline() {
+  return (
+    <TimeLineContainer>
+      <TimeLineBox>
+      <PostArea>
+      <TimelineHeader/>
+      <CreateNewPost/>
+        <DisplayPost></DisplayPost>
+      </PostArea>
+      <TrendingCard />
+      </TimeLineBox>
+    </TimeLineContainer>
+  );
+}
 
 const PostArea = styled.div`
   display: flex;
@@ -34,3 +51,8 @@ export function Timeline() {
     </PostArea>
   );
 }
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; */
+
