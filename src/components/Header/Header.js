@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import UserContext from "../../contexts/UserContext.js";
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
@@ -13,16 +13,20 @@ export default function Header() {
   const { headerStatus } = useContext(UserContext);
   const [temBotao, setTemBotao] = useState(false);
   const { logado, setLogado } = useContext(UserContext);
-
   const [searchBar, setsearchBar] = React.useState("");
+  const [userResult, setUserResult] = React.useState([]);
+  const navigate = useNavigate();
 
-  if (searchBar.length >= 3) {
-    const promise = axios.post(`${process.env.REACT_APP_API_URL}/srcuser`, {
-      username: `%${searchBar}%`,
-    });
+  useEffect(() => {
+    if (searchBar.length >= 3) {
+      const promise = axios.post(`${process.env.REACT_APP_API_URL}/srcuser`, {
+        username: `%${searchBar}%`,
+      });
 
-    promise.then((res) => console.log(res));
-  }
+      promise.then((res) => setUserResult(res.data));
+      console.log(searchBar);
+    }
+  }, [searchBar]);
 
   if (headerStatus === true) {
     return (
@@ -31,11 +35,31 @@ export default function Header() {
           <Link to="/timeline" style={{ textDecoration: "none" }}>
             <p>linkr</p>
           </Link>
-          <input
-            type={"text"}
-            placeholder="Search for people"
-            onChange={(e) => setsearchBar(e.target.value)}
-          ></input>
+          <section>
+            <input
+              type={"text"}
+              placeholder="Search for people"
+              onChange={(e) => setsearchBar(e.target.value)}
+            ></input>
+            {searchBar.length !== 0 ? (
+              <ul>
+                {userResult.map((result) => (
+                  <li>
+                    <img
+                      onClick={() => navigate(`/user/${result.id}`)}
+                      src={result.user_url}
+                      alt="foto do usuario"
+                    />{" "}
+                    <span onClick={() => navigate(`/user/${result.id}`)}>
+                      {result.username}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              ""
+            )}
+          </section>
           <div onClick={() => setTemBotao(!temBotao)}>
             <BsChevronDown />
             <img alt="userIcon" src={imgUser} />
@@ -58,13 +82,25 @@ const Container = styled.div`
   top: 0;
   left: calc(100vw / 2 - width/2);
   z-index: 1;
-  input {
-    height: 45px;
-    border: none;
-    background-color: white;
-    width: 30vw;
-    border-radius: 5px;
-    text-align: center;
+  section {
+    input {
+      height: 45px;
+      border: none;
+      background-color: white;
+      width: 30vw;
+      border-radius: 5px;
+      text-align: center;
+    }
+    ul {
+      position: absolute;
+      background-color: white;
+      margin-top: 5px;
+      width: 30vw;
+      li {
+        display: flex;
+        align-items: center;
+      }
+    }
   }
 
   p {

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 export function Login() {
   const navigate = useNavigate();
-  const URL = "http://localhost:5000/";
 
   const [logar, setLogar] = useState({ email: "", password: "" });
 
@@ -18,7 +17,7 @@ export function Login() {
       return alert("Por favor, preencha todos os dados!");
     }
 
-    const promise = axios.post(`${URL}`, logar);
+    const promise = axios.post(`${process.env.REACT_APP_API_URL}`, logar);
     promise.then((res) => {
       localStorage.setItem("token", res.data.token);
       alert("Usuário logado com sucesso!");
@@ -27,8 +26,8 @@ export function Login() {
 
     promise.catch((err) => {
       console.log(err.response.data);
-      alert('Ops! Tente novamente!');
-  });
+      alert("Ops! Tente novamente!");
+    });
   }
 
   return (

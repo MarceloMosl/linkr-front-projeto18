@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 export function UserPage() {
   const [userPosts, setUsersPosts] = React.useState([
-    { headline: "", post_url: "" },
+    { headline: "", post_url: "", user_url: "" },
   ]);
   const token = localStorage.getItem("token");
   const header = { headers: { Authorization: `Bearer ${token}` } };

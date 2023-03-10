@@ -5,11 +5,24 @@ import UserContext from "../contexts/UserContext";
 export function SearchUser({ userPosts }) {
   const { setHeaderStatus } = useContext(UserContext);
   const [isLiked, setIsLiked] = React.useState("white");
-
   setHeaderStatus(true);
+  console.log(userPosts);
+
+  if (userPosts.username !== undefined) {
+    return (
+      <All>
+        <section>
+          <img src={userPosts[0].user_url} alt="userPic" />
+          <span>
+            {userPosts[0].username}
+            's posts
+          </span>
+        </section>
+      </All>
+    );
+  }
 
   function Posts(a) {
-    console.log(a.usuario_liked);
     if (a.usuario_liked === true) {
       setIsLiked("red");
     }
@@ -38,10 +51,15 @@ export function SearchUser({ userPosts }) {
     <All>
       <section>
         <img src={userPosts[0].user_url} alt="userPic" />
-        <span>{userPosts[0].username}'s posts</span>
+        <span>
+          {userPosts[0].username}
+          's posts
+        </span>
       </section>
 
-      {userPosts.length === 0 ? "" : userPosts.map((a) => Posts(a))}
+      {userPosts[0].headline === undefined
+        ? ""
+        : userPosts.map((a) => Posts(a))}
     </All>
   );
 }
