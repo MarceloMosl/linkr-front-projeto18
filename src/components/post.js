@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PostDelete from "./PostEdit/postDelete";
-import { useState } from "react";
+import { useState} from "react";
 import { IoPencil } from "react-icons/io5";
 import axios from "axios";
 
@@ -27,37 +27,13 @@ export default function DisplayPost() {
 	const [editingPostId, setEditingPostId] = useState(null);
 	const [editedMessage, setEditedMessage] = useState("");
 
-	function handleEditSubmit(event, postId) {
-		event.preventDefault();
-		const data = { headline: editedMessage };
-		const header = { headers: { Authorization: `Bearer ${token}` } };
-		const updatePromise = axios.patch(
-			`${process.env.REACT_APP_API_URL}/posts/${postId}`,
-			data,
-			header
-		);
-		updatePromise.then((sucess) => {
-			console.log(sucess);
-		});
-		updatePromise.catch((error) => {
-			console.log(error);
-		});
-		setEditingPostId(null);
-		setEditedMessage("");
-	}
-
-	function handleEditCancel() {
-		setEditingPostId(null);
-		setEditedMessage("");
-	}
-
 	function handleEditClick(postId) {
 		if (postId === editingPostId) {
 			setEditingPostId(null);
 			setEditedMessage("");
 		} else {
 			setEditingPostId(postId);
-			setEditedMessage("");
+			setEditedMessage(testObj.find(obj => obj.id === postId).headline);
 		}
 	}
 
@@ -75,10 +51,29 @@ export default function DisplayPost() {
 		setEditedMessage(event.target.value);
 	}
 
+	function handleEditSubmit(event, postId) {
+		event.preventDefault();
+		const data = { headline: editedMessage };
+		const header = { headers: { Authorization: `Bearer ${token}` } };
+		const updatePromise = axios.patch(
+			`${process.env.REACT_APP_API_URL}/posts/${postId}`,
+			data,
+			header
+		);
+		updatePromise.then((success) => {
+			console.log(success);
+		});
+		updatePromise.catch((error) => {
+			alert(error);
+		});
+		setEditingPostId(null);
+		setEditedMessage("");
+	}
+
 	return (
 		<div>
 			{testObj.map((obj) => (
-				<Post key={obj.id}>
+				<Post key={obj.id} postId ={obj.id}>
 					<LikePfp>
 						<OpPfp src={obj.user_url} />
 						<ion-icon name="heart-outline" size="small"></ion-icon>
