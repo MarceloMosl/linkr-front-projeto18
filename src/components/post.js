@@ -1,82 +1,114 @@
 import React from "react";
 import styled from "styled-components";
-import PostEdit from "./PostEdit/postEdit";
 import PostDelete from "./PostEdit/postDelete";
 import { useState } from "react";
-import EditForm from "./PostEdit/editForm";
+import { IoPencil } from "react-icons/io5";
+import axios from "axios";
 
-const testObj = [{
-	id:"1", 
-	user_id:"1", 
-	username:"Brosuke", 
-	user_url:"https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg",
-	headline:"React",
-	hashstags_name: ["React"],
-	hashtags_id: [1],
-	post_url:"https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg",
-	total_likes:"420",
-	usuario_logado_like: true
-}]
-
+const testObj = [
+	{
+		id: "1",
+		user_id: "1",
+		username: "Brosuke",
+		user_url:
+			"https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg",
+		headline: "React",
+		hashstags_name: ["React"],
+		hashtags_id: [1],
+		post_url:
+			"https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg",
+		total_likes: "420",
+		usuario_logado_like: true,
+	},
+];
 
 export default function DisplayPost() {
-	const [isEditing, setIsEditing] = useState(false);
-	const [editedMessage, setEditedMessage] = useState(
-		"Muito maneiro esse tutorial de Material UI com React, deem uma olhada! #react #material"
-	);
-	const [originalMessage, setOriginalMessage] = useState(editedMessage);
+	const token = localStorage.getItem("token");
+	const [editingPostId, setEditingPostId] = useState(null);
+	const [editedMessage, setEditedMessage] = useState("");
 
-	function handleEditSubmit(event) {
+	function handleEditSubmit(event, postId) {
 		event.preventDefault();
-		setIsEditing(false);
-		setOriginalMessage(editedMessage);
+		const data = { headline: editedMessage };
+		const header = { headers: { Authorization: `Bearer ${token}` } };
+		const updatePromise = axios.patch(
+			`${process.env.REACT_APP_API_URL}/posts/${postId}`,
+			data,
+			header
+		);
+		updatePromise.then((sucess) => {
+			console.log(sucess);
+		});
+		updatePromise.catch((error) => {
+			console.log(error);
+		});
+		setEditingPostId(null);
+		setEditedMessage("");
 	}
 
 	function handleEditCancel() {
-		setEditedMessage(originalMessage);
-		setIsEditing(false);
+		setEditingPostId(null);
+		setEditedMessage("");
+	}
+
+	function handleEditClick(postId) {
+		if (postId === editingPostId) {
+			setEditingPostId(null);
+			setEditedMessage("");
+		} else {
+			setEditingPostId(postId);
+			setEditedMessage("");
+		}
+	}
+
+	function onKeyPressed(k) {
+		if (k.keyCode === 27) {
+			setEditingPostId(null);
+			setEditedMessage("");
+		}
+		if (k.keyCode === 13) {
+			handleEditSubmit(null, editingPostId);
+		}
+	}
+
+	function handleInputChange(event) {
+		setEditedMessage(event.target.value);
 	}
 
 	return (
-		<Post>
-			<LikePfp>
-				<OpPfp
-					src={
-						"https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg"
-					}
-				/>
-				<ion-icon name="heart-outline" size="small"></ion-icon>
-				<Like>X LIKES</Like>
-			</LikePfp>
-			<PostText>
-				<OpName>Yosuke Hanamura</OpName>
-				{isEditing ? (
-					<EditForm
-						editedMessage={editedMessage}
-						setEditedMessage={setEditedMessage}
-						handleEditSubmit={handleEditSubmit}
-						handleEditCancel={handleEditCancel}
-					/>
-				) : (
-					<PostMessage>{editedMessage}</PostMessage>
-				)}
-			</PostText>
-
-			<IconHolder>
-				<PostEdit
-					postId={"postId"}
-					isEditing={isEditing}
-					setIsEditing={setIsEditing}
-					inputValue={editedMessage}
-					handleEditSubmit={handleEditSubmit}
-					handleEditCancel={handleEditCancel}
-				/>
-                <PostDelete
-                    id = {"id"}
-                />
-
-			</IconHolder>
-		</Post>
+		<div>
+			{testObj.map((obj) => (
+				<Post key={obj.id}>
+					<LikePfp>
+						<OpPfp src={obj.user_url} />
+						<ion-icon name="heart-outline" size="small"></ion-icon>
+						<Like>{obj.total_likes} LIKES</Like>
+					</LikePfp>
+					<PostText>
+						<OpName>{obj.username}</OpName>
+						{editingPostId === obj.id ? (
+							<EditInput
+								onKeyDown={onKeyPressed}
+								onSubmit={(event) =>
+									handleEditSubmit(event, obj.id)
+								}>
+								<input
+									type="text"
+									value={editedMessage}
+									onChange={handleInputChange}
+								/>
+							</EditInput>
+						) : (
+							<PostMessage>{obj.headline}</PostMessage>
+						)}
+					</PostText>
+					<IconHolder>
+						<PencilIcon onClick={() => handleEditClick(obj.id)} />
+						<PostDelete id={obj.id} />
+					</IconHolder>
+				</Post>
+			))}
+		</div>
 	);
 }
 
@@ -91,7 +123,7 @@ const Post = styled.div`
 	padding-bottom: 20px;
 	padding-right: 21px;
 	box-sizing: border-box;
-	margin-bottom:16px;
+	margin-bottom: 16px;
 	position: relative;
 `;
 const OpPfp = styled.img`
@@ -136,10 +168,24 @@ const LikePfp = styled.div`
 `;
 
 const IconHolder = styled.div`
-    display:flex;
+	display: flex;
 	position: absolute;
 	right: 20px;
 	top: 20px;
 	color: white;
-    gap: 10px;
+	gap: 10px;
+`;
+
+const EditInput = styled.form`
+	width: 490px;
+	background: #ffffff;
+	border-radius: 7px;
+	border: none;
+	padding: 10px 0px 10px 10px;
+	margin: 15px 0px;
+`;
+
+const PencilIcon = styled(IoPencil)`
+	color: white;
+	cursor: pointer;
 `;
