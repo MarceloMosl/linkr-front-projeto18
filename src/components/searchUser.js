@@ -27,7 +27,7 @@ export function SearchUser({ userPosts }) {
     }
 
     return (
-      <Post>
+      <Post data-test="post">
         <LikePfp>
           <OpPfp src={a.user_url} />
           <ion-icon

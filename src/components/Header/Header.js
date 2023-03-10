@@ -39,13 +39,14 @@ export default function Header() {
           <section>
             <input
               type={"text"}
+              data-test="search"
               placeholder="Search for people"
               onChange={(e) => setsearchBar(e.target.value)}
             ></input>
             {searchBar.length !== 0 ? (
               <ul>
                 {userResult.map((result) => (
-                  <li>
+                  <li data-test="user-search">
                     <img
                       onClick={() => navigate(`/user/${result.id}`)}
                       src={result.user_url}
