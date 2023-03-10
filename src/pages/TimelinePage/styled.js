@@ -11,3 +11,9 @@ box-sizing: border-box;
 
   /* align-items: center; */
 `
+
+
+export const TimeLineBox = styled.div`
+display: flex;
+margin-top:100px;
+`

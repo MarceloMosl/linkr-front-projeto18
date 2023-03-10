@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const TimelineHeaderContainer = styled.div`
-margin-top:76px;
   h1 {
     font-family: "Oswald";
     font-style: normal;

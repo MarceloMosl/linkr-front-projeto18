@@ -79,7 +79,7 @@ const Post = styled.div`
 	padding-bottom: 20px;
 	padding-right: 21px;
 	box-sizing: border-box;
-	margin-top: 76px;
+	margin-bottom:16px;
 	position: relative;
 `;
 const OpPfp = styled.img`

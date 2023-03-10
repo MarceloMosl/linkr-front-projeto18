@@ -3,8 +3,9 @@ import axios from "axios";
 import styled from "styled-components";
 import DisplayPost from "../../components/post.js";
 import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
-import { TimeLineContainer } from "./styled.js";
+import { TimeLineBox, TimeLineContainer } from "./styled.js";
 import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.js";
+import { CreateNewPost } from "../../components/CreateNewPost/CreateNewPost.js";
 
 /*
 const url = 'https://www.google.com';
@@ -17,18 +18,21 @@ urlMetadata(url).then(metadata => {
 export function Timeline() {
   return (
     <TimeLineContainer>
-      <TimelineHeader/>
+      <TimeLineBox>
       <PostArea>
+      <TimelineHeader/>
+      <CreateNewPost/>
         <DisplayPost></DisplayPost>
       </PostArea>
       <TrendingCard />
+      </TimeLineBox>
     </TimeLineContainer>
   );
 }
 
 const PostArea = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: center; */
 `;
