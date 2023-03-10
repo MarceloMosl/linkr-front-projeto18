@@ -7,7 +7,6 @@ export function UserPage() {
   const [userPosts, setUsersPosts] = React.useState([
     { headline: "", post_url: "", user_url: "" },
   ]);
-
   const token = localStorage.getItem("token");
   const header = { headers: { Authorization: `Bearer ${token}` } };
   const { id } = useParams();
@@ -21,7 +20,7 @@ export function UserPage() {
       setUsersPosts(res.data);
     });
     promise.catch((err) => alert(err));
-  }, []);
+  }, [id]);
 
   return <SearchUser userPosts={userPosts} />;
 }
