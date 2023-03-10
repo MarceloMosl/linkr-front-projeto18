@@ -28,7 +28,7 @@ export default function Header() {
     return (
       <>
         <Container>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/timeline" style={{ textDecoration: "none" }}>
             <p>linkr</p>
           </Link>
           <input

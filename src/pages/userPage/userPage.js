@@ -8,7 +8,6 @@ export function UserPage() {
     { headline: "", post_url: "" },
   ]);
   const token = localStorage.getItem("token");
-  const [user, setUser] = React.useState([]);
   const header = { headers: { Authorization: `Bearer ${token}` } };
   const { id } = useParams();
 
@@ -18,11 +17,10 @@ export function UserPage() {
       header
     );
     promise.then((res) => {
-      setUsersPosts(res.data[0]);
-      setUser(res.data[1][0]);
+      setUsersPosts(res.data);
     });
     promise.catch((err) => alert(err));
   }, []);
 
-  return <SearchUser user={user} userPosts={userPosts} />;
+  return <SearchUser userPosts={userPosts} />;
 }

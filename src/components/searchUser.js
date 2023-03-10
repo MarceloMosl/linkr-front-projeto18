@@ -1,28 +1,47 @@
+import React, { useContext } from "react";
 import styled from "styled-components";
+import UserContext from "../contexts/UserContext";
 
-export function SearchUser({ userPosts, user }) {
+export function SearchUser({ userPosts }) {
+  const { setHeaderStatus } = useContext(UserContext);
+  const [isLiked, setIsLiked] = React.useState("white");
+
+  setHeaderStatus(true);
+
+  function Posts(a) {
+    console.log(a.usuario_liked);
+    if (a.usuario_liked === true) {
+      setIsLiked("red");
+    }
+
+    return (
+      <Post>
+        <LikePfp>
+          <OpPfp src={a.user_url} />
+          <ion-icon
+            style={{ color: isLiked }}
+            name="heart"
+            size="small"
+          ></ion-icon>
+          <Like>{a.total_likes}LIKES</Like>
+        </LikePfp>
+        <PostText>
+          <OpName>{a.username}</OpName>
+          <PostMessage>{a.headline}</PostMessage>
+          <p>Url do Post: {a.post_url}</p>
+        </PostText>
+      </Post>
+    );
+  }
+
   return (
     <All>
       <section>
-        <img src={user.user_url} />
-        <span>{user.username}'s posts</span>
+        <img src={userPosts[0].user_url} alt="userPic" />
+        <span>{userPosts[0].username}'s posts</span>
       </section>
 
-      {userPosts.length === 0
-        ? ""
-        : userPosts.map((a) => (
-            <Post>
-              <LikePfp>
-                <OpPfp src={user.user_url} />
-                <ion-icon name="heart-outline" size="small"></ion-icon>
-                <Like>X LIKES</Like>
-              </LikePfp>
-              <PostText>
-                <OpName>{user.username}</OpName>
-                <PostMessage>{a.headline}</PostMessage>
-              </PostText>
-            </Post>
-          ))}
+      {userPosts.length === 0 ? "" : userPosts.map((a) => Posts(a))}
     </All>
   );
 }
@@ -85,6 +104,12 @@ const PostText = styled.div`
   align-items: flex-start;
   box-sizing: border-box;
   padding-top: 2px;
+
+  p {
+    margin-top: 10px;
+    color: white;
+    word-break: break-all;
+  }
 `;
 const PostMessage = styled.div`
   display: flex;
@@ -102,4 +127,9 @@ const LikePfp = styled.div`
   font-size: 11px;
   align-items: center;
   color: #ffffff;
+
+  ion-icon {
+    color: {
+    }
+  }
 `;
