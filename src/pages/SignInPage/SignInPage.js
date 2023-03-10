@@ -25,8 +25,10 @@ export function Login() {
       navigate("/timeline");
     });
 
-    promise.catch((err) => console.log(err.response.data));
-    alert("Ops! Tente novamente!");
+    promise.catch((err) => {
+      console.log(err.response.data);
+      alert('Ops! Tente novamente!');
+  });
   }
 
   return (

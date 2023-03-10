@@ -38,14 +38,12 @@ export function SignUp () {
                 navigate("/");
             });
     
-            promise.catch((err) => console.log(err.response.data))
-            alert('Ops! Tente novamente!')
-            setDesabilitado (false)
-
-    
-        
+            promise.catch((err) => {
+                console.log(err.response.data);
+                alert('Ops! Tente novamente!');
+                setDesabilitado(false);
+            });
         }
-
     return (
         <Container>
 
