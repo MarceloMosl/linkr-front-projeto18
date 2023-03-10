@@ -15,7 +15,8 @@ export default function DisplayPost() {
 	const [editingPostId, setEditingPostId] = useState(null);
 	const [editedMessage, setEditedMessage] = useState("");
 	const [timelineContent, setTimelineContent] = useState([]);
-
+	const [isResponseEdited, setIsResponseEdited] = useState("");
+	const [isPostDeleted, setIsPostDeleted] = useState(false);
 
 	useEffect(() => {
 		const URL = `${process.env.REACT_APP_API_URL}/timeline`;
@@ -28,7 +29,7 @@ export default function DisplayPost() {
 		console.log(error)
 		});
 	
-	}, [setTimelineContent]);
+	}, [setTimelineContent, isResponseEdited, isPostDeleted]);
 
 
 
@@ -57,7 +58,6 @@ export default function DisplayPost() {
 	}
 
 	function handleEditSubmit(event, postId) {
-		event.preventDefault();
 		const data = { headline: editedMessage };
 		const header = { headers: { Authorization: `Bearer ${token}` } };
 		const updatePromise = axios.patch(
@@ -66,7 +66,8 @@ export default function DisplayPost() {
 			header
 		);
 		updatePromise.then((success) => {
-			console.log(success);
+			console.log(success)
+			setIsResponseEdited(success.data);
 		});
 		updatePromise.catch((error) => {
 			alert(error);
@@ -104,7 +105,7 @@ export default function DisplayPost() {
 					</PostText>
 					<IconHolder>
 						<PencilIcon onClick={() => handleEditClick(obj.id)} />
-						<PostDelete id={obj.id} />
+						<PostDelete id={obj.id} setIsPostDeleted = {setIsPostDeleted} isPostDeleted= {isPostDeleted}/>
 					</IconHolder>
 				</Post>
 			))}
