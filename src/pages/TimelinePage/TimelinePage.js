@@ -7,6 +7,7 @@ import { TimeLineBox, TimeLineContainer } from "./styled.js";
 import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.js";
 import { CreateNewPost } from "../../components/CreateNewPost/CreateNewPost.js";
 import Header from "../../components/Header/Header.js";
+import UserContext from "../../contexts/UserContext.js";
 
 /*
 const url = 'https://www.google.com';
@@ -17,10 +18,12 @@ urlMetadata(url).then(metadata => {
 )
 */
 export function Timeline() {
+  const { setHeaderStatus } = useContext(UserContext);
+  setHeaderStatus(true);
   
   return (
     <>
-      
+      <Header/>
     <TimeLineContainer>
       <TimeLineBox>
       <PostArea>
