@@ -18,7 +18,7 @@ export function CreateNewPost() {
     }
 
     try {
-        await axios.post(`${process.env.REACE_APP_API_URL}/newpost`,body)
+        await axios.post(`${process.env.REACT_APP_API_URL}/newpost`,body)
         setIsLoading(false)
         setUrl("")
         setPostDescription("")
@@ -29,8 +29,7 @@ export function CreateNewPost() {
     }
 
     return(
-        <CreateNewPostContainer>
-
+        <CreateNewPostContainer data-test="publish-box">
             <UserImgBox>
             <StyledUserImg
             src={
@@ -43,7 +42,8 @@ export function CreateNewPost() {
             <StyledPostTitle>What are you going to share today?</StyledPostTitle>
             <StyledForm onSubmit={addNewPost}>
                 <Input
-                class="input-url"
+                data-test="link"
+                className="inputUrl"
                 type="url"
                 placeholder="http://..."
                 value={url}
@@ -52,7 +52,8 @@ export function CreateNewPost() {
                 required
                 />
                 <Input
-                class="InputDescription"
+                data-test="description"
+                className="inputDescription"
                 type="text"
                 placeholder="Awesome article about #javascript"
                 value={postDescription}
@@ -60,7 +61,7 @@ export function CreateNewPost() {
                 disabled={isLoading}
                 required
                 />
-                <button type="submit" disabled={isLoading}>
+                <button type="submit" disabled={isLoading} data-test="publish-btn">
                     Publicar
                 </button>    
             </StyledForm>

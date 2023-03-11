@@ -34,7 +34,7 @@ function PostDelete({ id, setIsPostDeleted , isPostDeleted}) {
 
 	return (
 		<div>
-			<IoTrashOutline ref={iconRef} onClick={handleIconClick} />
+			<IoTrashOutline ref={iconRef} onClick={handleIconClick} data-text="delete-btn"/>
 			{isModalOpen && (
 				<ModalContainer
 					role="dialog"

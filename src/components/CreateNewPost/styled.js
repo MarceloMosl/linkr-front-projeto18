@@ -17,16 +17,20 @@ export const CreateNewPostContainer = styled.div`
   padding-right: 21px;
 `;
 
-export const UserImgBox = styled.div``;
+export const UserImgBox = styled.div`
+`;
 
 export const StyledUserImg = styled.img`
   /* display: flex; */
   width: 50px;
   height: 50px;
   border-radius: 26.5px;
+  
 `;
 export const PostBox = styled.div`
 margin-left:18px;
+margin-top:10px;
+
 `;
 export const StyledPostTitle = styled.div`
   font-family: "Lato";
@@ -34,18 +38,18 @@ export const StyledPostTitle = styled.div`
   font-weight: 300;
   font-size: 20px;
   line-height: 24px;
+  margin-bottom: 10px;
 
   color: #707070;
 `;
 export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  gap:5px;
+  position: absolute;
 
   input {
-    
-    width: 503px;
-    height: 30px;
-
+  
     background: #efefef;
     border-radius: 5px;
     border: none;
@@ -76,18 +80,20 @@ export const StyledForm = styled.form`
     line-height: 17px;
 
     color: #ffffff;
-    align-items:flex-end
+    position:relative;
+    left: 394px;
   }
 `;
 
-
 export const Input = styled.input`
-  &.input-url {
-    width: 200px;
+  &.inputUrl {
+    width: 503px;
+    height: 30px;
   }
   
-  &.InputDescription {
-    width: 100px;
+  &.inputDescription {
+    width: 503px;
+    height: 66px;
   }
   `
 ;

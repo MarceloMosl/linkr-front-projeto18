@@ -9,9 +9,11 @@ export function Login() {
   const [logar, setLogar] = useState({ email: "", password: "" });
 
   const { email, password } = logar;
+  const [isLoading,setIsLoading] = useState(false)
 
   function log(event) {
     event.preventDefault();
+    setIsLoading(true)
 
     if (email === "" || password === "") {
       return alert("Por favor, preencha todos os dados!");
@@ -19,6 +21,7 @@ export function Login() {
 
     const promise = axios.post(`${process.env.REACT_APP_API_URL}`, logar);
     promise.then((res) => {
+      setIsLoading(false)
       localStorage.setItem("token", res.data.token);
       alert("Usuário logado com sucesso!");
       navigate("/timeline");
@@ -50,6 +53,7 @@ export function Login() {
             }
             required
             data-test="email"
+            disabled={isLoading}
           />
 
           <input
@@ -61,9 +65,10 @@ export function Login() {
             }
             required
             data-test="password"
+            disabled={isLoading}
           />
 
-          <button type="submit" data-test="login-btn">
+          <button type="submit" data-test="login-btn" disabled={isLoading}>
             Log In
           </button>
         </form>

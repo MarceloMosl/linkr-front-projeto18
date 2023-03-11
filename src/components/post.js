@@ -97,6 +97,7 @@ export default function DisplayPost() {
                   type="text"
                   value={editedMessage}
                   onChange={handleInputChange}
+                  data-text="edit-input"
                 />
               </EditInput>
             ) : (
@@ -104,11 +105,12 @@ export default function DisplayPost() {
             )}
           </PostText>
           <IconHolder>
-            <PencilIcon onClick={() => handleEditClick(obj.id)} />
+            <PencilIcon onClick={() => handleEditClick(obj.id)} data-text="edit-btn"/>
             <PostDelete
               id={obj.id}
               setIsPostDeleted={setIsPostDeleted}
               isPostDeleted={isPostDeleted}
+              
             />
           </IconHolder>
         </Post>
