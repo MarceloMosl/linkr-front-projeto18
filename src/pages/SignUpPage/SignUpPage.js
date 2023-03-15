@@ -29,7 +29,7 @@ export function SignUp() {
     setDesabilitado(true);
 
     const promise = axios.post(
-      `${process.env.REACT_APP_API_URL}sign-up`,
+      `${process.env.REACT_APP_API_URL}/sign-up`,
       cadastrar
     );
     promise.then((res) => {

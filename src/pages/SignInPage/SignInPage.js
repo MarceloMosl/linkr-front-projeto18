@@ -19,7 +19,7 @@ export function Login() {
       return alert("Por favor, preencha todos os dados!");
     }
 
-    const promise = axios.post(`${process.env.REACT_APP_API_URL}`, logar);
+    const promise = axios.post(`${process.env.REACT_APP_API_URL}/`, logar);
     promise.then((res) => {
       setIsLoading(false)
       localStorage.setItem("token", res.data.token);
