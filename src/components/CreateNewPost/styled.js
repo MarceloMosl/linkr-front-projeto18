@@ -82,6 +82,7 @@ export const StyledForm = styled.form`
     color: #ffffff;
     position:relative;
     left: 394px;
+    cursor:pointer;
   }
 `;
 

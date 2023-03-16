@@ -1,10 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { withTheme } from "styled-components";
 import PostDelete from "./PostEdit/postDelete";
 import { useState, useEffect } from "react";
 import { IoPencil } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ReactTagify } from "react-tagify";
 
 export default function DisplayPost() {
   const navigate = useNavigate();
@@ -101,7 +102,10 @@ export default function DisplayPost() {
                 />
               </EditInput>
             ) : (
-              <PostMessage>{obj.headline}</PostMessage>
+              <PostMessage>
+                <BodyPostMessageStyled body={obj.headline}/>
+                
+                </PostMessage>
             )}
           </PostText>
           <IconHolder>
@@ -203,3 +207,25 @@ const PencilIcon = styled(IoPencil)`
   color: white;
   cursor: pointer;
 `;
+
+function BodyPostMessageStyled(body) {
+  const navigate = useNavigate();
+
+  const tagStyle = {
+    color: 'white',
+    fontWeight: 500,
+    cursor: 'pointer'
+  }
+  return(
+    <>
+    <ReactTagify
+    tagStyle={tagStyle}
+    tagClicked={(tag) => navigate(`/hashtag/${tag}`)}
+    >
+      <p>
+      {body}
+      </p>
+    </ReactTagify>
+    </>
+  )
+}
