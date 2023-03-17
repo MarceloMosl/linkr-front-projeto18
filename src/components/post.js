@@ -217,10 +217,15 @@ function BodyPostMessageStyled({ body }) {
     cursor: 'pointer'
   }
 
+  function handleClick(tag){
+    const tagName = tag.substring(1)
+     navigate(`/hashtag/${tagName}`)
+  }
+
   return (
     <ReactTagify
       tagStyle={tagStyle}
-      tagClicked={(tag) => navigate(`/hashtag/${tag}`)}
+      tagClicked={(tag) => handleClick(tag)}
     >
       <p>
         
