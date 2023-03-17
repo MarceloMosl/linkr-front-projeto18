@@ -208,7 +208,7 @@ const PencilIcon = styled(IoPencil)`
   cursor: pointer;
 `;
 
-function BodyPostMessageStyled(body) {
+function BodyPostMessageStyled({ body }) {
   const navigate = useNavigate();
 
   const tagStyle = {
@@ -216,16 +216,16 @@ function BodyPostMessageStyled(body) {
     fontWeight: 500,
     cursor: 'pointer'
   }
-  return(
-    <>
+
+  return (
     <ReactTagify
-    tagStyle={tagStyle}
-    tagClicked={(tag) => navigate(`/hashtag/${tag}`)}
+      tagStyle={tagStyle}
+      tagClicked={(tag) => navigate(`/hashtag/${tag}`)}
     >
       <p>
-      {body}
+        
+        {typeof body === 'string' ? body : JSON.stringify(body)}
       </p>
     </ReactTagify>
-    </>
   )
 }

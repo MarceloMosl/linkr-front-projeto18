@@ -57,7 +57,7 @@ export function CreateNewPost() {
                 type="text"
                 placeholder="Awesome article about #javascript"
                 value={postDescription}
-                onChange={(e) => setUrl(e.target.value)}
+                onChange={(e) => setPostDescription(e.target.value)}
                 disabled={isLoading}
                 required
                 />
