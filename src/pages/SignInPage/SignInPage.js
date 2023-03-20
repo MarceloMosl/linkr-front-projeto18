@@ -30,6 +30,7 @@ export function Login() {
     promise.catch((err) => {
       console.log(err.response.data);
       alert("Ops! Tente novamente!");
+      setIsLoading(false);
     });
   }
 
@@ -183,8 +184,6 @@ const Inputs = styled.div`
     cursor: pointer;
   }
   button:disabled {
-    width: 80%;
-    height: 65px;
     background: grey;
     opacity: 0.5;
   }

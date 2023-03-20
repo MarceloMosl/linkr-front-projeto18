@@ -214,8 +214,6 @@ const Inputs = styled.div`
     cursor: pointer;
   }
   button:disabled {
-    width: 80%;
-    height: 65px;
     background: grey;
     opacity: 0.5;
   }
