@@ -1,19 +1,23 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
 
 export function Login() {
   const navigate = useNavigate();
 
+  const { setHeaderStatus } = useContext(UserContext);
+  setHeaderStatus(false);
+
   const [logar, setLogar] = useState({ email: "", password: "" });
 
   const { email, password } = logar;
-  const [isLoading,setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   function log(event) {
     event.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
 
     if (email === "" || password === "") {
       return alert("Por favor, preencha todos os dados!");
@@ -21,7 +25,7 @@ export function Login() {
 
     const promise = axios.post(`${process.env.REACT_APP_API_URL}/`, logar);
     promise.then((res) => {
-      setIsLoading(false)
+      setIsLoading(false);
       localStorage.setItem("token", res.data.token);
       alert("Usuário logado com sucesso!");
       navigate("/timeline");
