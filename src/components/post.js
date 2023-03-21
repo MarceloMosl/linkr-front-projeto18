@@ -114,7 +114,6 @@ export default function DisplayPost() {
               id={obj.id}
               setIsPostDeleted={setIsPostDeleted}
               isPostDeleted={isPostDeleted}
-              
             />
           </IconHolder>
         </Post>
