@@ -14,7 +14,6 @@ import Header from "./components/Header/Header.js";
 
 function App() {
 	const [logado, setLogado] = useState("");
-	const [imgUser, setImgUser] = useState("");
 	const [headerStatus, setHeaderStatus] = useState(false);
 
 	const [isResponseEdited, setIsResponseEdited] = useState(false);
@@ -28,8 +27,6 @@ function App() {
 				value={{
 					logado,
 					setLogado,
-					imgUser,
-					setImgUser,
 					headerStatus,
 					setHeaderStatus,
 				}}>
