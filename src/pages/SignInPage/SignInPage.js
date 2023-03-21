@@ -76,10 +76,10 @@ export function Login() {
           <button type="submit" data-test="login-btn" disabled={isLoading}>
             Log In
           </button>
+          <p data-test="sign-up-link" onClick={() => navigate("/sign-up")}>
+            First time? Create an account!
+          </p>
         </form>
-        <p data-test="sign-up-link" onClick={() => navigate("/sign-up")}>
-          First time? Create an account!
-        </p>
       </Inputs>
     </Container>
   );
@@ -88,10 +88,9 @@ export function Login() {
 const Container = styled.div`
   display: flex;
   width: 100vw;
-  height: 900px;
-  @media (max-width: 375px) {
+  height: 100vh;
+  @media (max-width: 950px) {
     flex-direction: column;
-    height: 667px;
   }
 `;
 
@@ -99,7 +98,6 @@ const Title = styled.div`
   display: flex;
   flex-direction: column;
   width: 75vw;
-  height: 900px;
   background-color: #151515;
   font-family: "Passion One";
   font-style: normal;
@@ -120,9 +118,11 @@ const Title = styled.div`
     line-height: 64px;
     width: 442px;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 950px) {
     width: 100%;
-    height: 25%;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 20px;
     div {
       display: flex;
       flex-direction: column;
@@ -145,47 +145,60 @@ const Title = styled.div`
 `;
 
 const Inputs = styled.div`
+  @media (max-width: 950px) {
+    height: 100vh;
+    width: 100vw;
+    form {
+      margin: auto;
+      width: 100vw;
+      input {
+        width: 90%;
+      }
+      button {
+        width: 90%;
+      }
+    }
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "Oswald";
   font-weight: 700;
+  gap: 0px;
   width: 50vw;
   background-color: #333333;
   form {
     display: flex;
     flex-direction: column;
-    margin: 170px 0 0 0;
+    align-items: center;
+    margin: auto;
+    gap: 10px;
   }
   input {
-    width: 429px;
-    height: 50px;
-    left: 956px;
-    top: 317px;
-    background: #ffffff;
+    width: 30vw;
+    height: 80px;
     border-radius: 6px;
     font-family: "Oswald";
-    font-style: normal;
     font-size: 27px;
-    line-height: 40.01px;
     color: #9f9f9f;
-    margin-bottom: 12px;
     padding: 18px;
+    border-radius: 6px;
+    border: none;
+    box-sizing: border-box;
   }
   button {
-    width: 465px;
+    width: 30vw;
     height: 65px;
     background: #1877f2;
     border-radius: 6px;
     font-family: "Oswald";
-    font-style: normal;
     font-weight: 700;
     font-size: 27px;
-    line-height: 40px;
     color: #ffffff;
-    margin-bottom: 22px;
     border-color: transparent;
     cursor: pointer;
+    border-radius: 6px;
+    border: none;
   }
   button:disabled {
     background: grey;
@@ -196,7 +209,6 @@ const Inputs = styled.div`
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
-    line-height: 24px;
     text-decoration-line: underline;
     color: #ffffff;
     cursor: pointer;
