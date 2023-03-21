@@ -1,40 +1,44 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { CreateNewPostContainer, Input, PostBox, StyledForm, StyledPostTitle, StyledUserImg, UserImgBox } from "./styled";
 import axios from "axios";
+import UserContext from "../../contexts/UserContext.js";
 
 
 export function CreateNewPost() {
-    const [url,setUrl] = useState("")
-    const [postDescription,setPostDescription] = useState("")
+    const [link,setUrl] = useState("")
+    const [description,setPostDescription] = useState("")
     const [isLoading,setIsLoading] = useState(false)
+    const token = localStorage.getItem("token");
+    const { imgUser } = useContext(UserContext);
 
     async function addNewPost(event){
         event.preventDefault()
         setIsLoading(true)
 
-    const body = {
-        url,
-        postDescription
-    }
+    const body = { link, description }
 
-    try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/newpost`,body)
+    const URL = `${process.env.REACT_APP_API_URL}`;
+    const header = { headers: { Authorization: `Bearer ${token}` } };
+    const createPost = axios.post(`${URL}/posts`, body, header);
+
+    createPost.then(response => {
         setIsLoading(false)
         setUrl("")
         setPostDescription("")
-    } catch (error) {
-        alert(error.response)
-    }
-
+    })
+    createPost.catch(err => {
+        alert(err)
+        setIsLoading(false)
+        setUrl("")
+        setPostDescription("")
+    })
     }
 
     return(
         <CreateNewPostContainer data-test="publish-box">
             <UserImgBox>
             <StyledUserImg
-            src={
-                "https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg"
-            }
+            src={imgUser}
             />
             </UserImgBox>
 
@@ -46,7 +50,7 @@ export function CreateNewPost() {
                 className="inputUrl"
                 type="url"
                 placeholder="http://..."
-                value={url}
+                value={link}
                 onChange={(e) => setUrl(e.target.value)}
                 disabled={isLoading}
                 required
@@ -56,7 +60,7 @@ export function CreateNewPost() {
                 className="inputDescription"
                 type="text"
                 placeholder="Awesome article about #javascript"
-                value={postDescription}
+                value={description}
                 onChange={(e) => setPostDescription(e.target.value)}
                 disabled={isLoading}
                 required
