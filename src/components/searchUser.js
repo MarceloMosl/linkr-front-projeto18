@@ -6,6 +6,7 @@ export function SearchUser({ userPosts }) {
   const { setHeaderStatus } = useContext(UserContext);
   const [isLiked, setIsLiked] = React.useState("white");
   setHeaderStatus(true);
+  console.log(userPosts);
 
   if (userPosts.username !== undefined) {
     return (

@@ -1,13 +1,13 @@
 import React from "react";
 import styled, { withTheme } from "styled-components";
 import PostDelete from "./PostEdit/postDelete";
-import { useState, useEffect,useContext} from "react";
+import { useState, useEffect, useContext } from "react";
 import { IoPencil } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
 import useFetchTimeline from "./hooks/fetchTimeline";
-import  TimelineContext  from '../contexts/TimelineContext';
+import TimelineContext from "../contexts/TimelineContext";
 
 export default function DisplayPost() {
   const navigate = useNavigate();
@@ -24,8 +24,12 @@ export default function DisplayPost() {
     setIsPostCreated,
   } = useContext(TimelineContext);
 
-
-  const timelineContent = useFetchTimeline(token, isResponseEdited, isPostDeleted, isPostCreated);
+  const timelineContent = useFetchTimeline(
+    token,
+    isResponseEdited,
+    isPostDeleted,
+    isPostCreated
+  );
 
   function handleEditClick(postId) {
     if (postId === editingPostId) {
@@ -78,14 +82,14 @@ export default function DisplayPost() {
         <Post key={obj.id} postId={obj.id}>
           <LikePfp>
             <OpPfp
-              onClick={() => navigate(`/user/${obj.id}`)}
+              onClick={() => navigate(`/user/${obj.user_id}`)}
               src={obj.user_url}
             />
             <ion-icon name="heart-outline" size="small"></ion-icon>
             <Like>{obj.total_likes} LIKES</Like>
           </LikePfp>
           <PostText>
-            <OpName onClick={() => navigate(`/user/${obj.id}`)}>
+            <OpName onClick={() => navigate(`/user/${obj.user_id}`)}>
               {obj.username}
             </OpName>
             {editingPostId === obj.id ? (
@@ -102,13 +106,15 @@ export default function DisplayPost() {
               </EditInput>
             ) : (
               <PostMessage>
-                <BodyPostMessageStyled body={obj.headline}/>
-                
-                </PostMessage>
+                <BodyPostMessageStyled body={obj.headline} />
+              </PostMessage>
             )}
           </PostText>
           <IconHolder>
-            <PencilIcon onClick={() => handleEditClick(obj.id)} data-text="edit-btn"/>
+            <PencilIcon
+              onClick={() => handleEditClick(obj.id)}
+              data-text="edit-btn"
+            />
             <PostDelete
               id={obj.id}
               setIsPostDeleted={setIsPostDeleted}
@@ -210,25 +216,19 @@ function BodyPostMessageStyled({ body }) {
   const navigate = useNavigate();
 
   const tagStyle = {
-    color: 'white',
+    color: "white",
     fontWeight: 500,
-    cursor: 'pointer'
-  }
+    cursor: "pointer",
+  };
 
-  function handleClick(tag){
-    const tagName = tag.substring(1)
-     navigate(`/hashtag/${tagName}`)
+  function handleClick(tag) {
+    const tagName = tag.substring(1);
+    navigate(`/hashtag/${tagName}`);
   }
 
   return (
-    <ReactTagify
-      tagStyle={tagStyle}
-      tagClicked={(tag) => handleClick(tag)}
-    >
-      <p>
-        
-        {typeof body === 'string' ? body : JSON.stringify(body)}
-      </p>
+    <ReactTagify tagStyle={tagStyle} tagClicked={(tag) => handleClick(tag)}>
+      <p>{typeof body === "string" ? body : JSON.stringify(body)}</p>
     </ReactTagify>
-  )
+  );
 }
