@@ -1,32 +1,31 @@
 import React from "react";
 import styled, { withTheme } from "styled-components";
 import PostDelete from "./PostEdit/postDelete";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext} from "react";
 import { IoPencil } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
+import useFetchTimeline from "./hooks/fetchTimeline";
+import  TimelineContext  from '../contexts/TimelineContext';
 
 export default function DisplayPost() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [editingPostId, setEditingPostId] = useState(null);
   const [editedMessage, setEditedMessage] = useState("");
-  const [timelineContent, setTimelineContent] = useState([]);
-  const [isResponseEdited, setIsResponseEdited] = useState("");
-  const [isPostDeleted, setIsPostDeleted] = useState(false);
 
-  useEffect(() => {
-    const URL = `${process.env.REACT_APP_API_URL}/timeline`;
-    const header = { headers: { Authorization: `Bearer ${token}` } };
-    const getRegistry = axios.get(URL, header);
-    getRegistry.then((response) => {
-      setTimelineContent(response.data);
-    });
-    getRegistry.catch((error) => {
-      console.log(error);
-    });
-  }, [setTimelineContent, isResponseEdited, isPostDeleted]);
+  const {
+    isResponseEdited,
+    setIsResponseEdited,
+    isPostDeleted,
+    setIsPostDeleted,
+    isPostCreated,
+    setIsPostCreated,
+  } = useContext(TimelineContext);
+
+
+  const timelineContent = useFetchTimeline(token, isResponseEdited, isPostDeleted, isPostCreated);
 
   function handleEditClick(postId) {
     if (postId === editingPostId) {

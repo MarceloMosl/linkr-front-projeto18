@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { CreateNewPostContainer, Input, PostBox, StyledForm, StyledPostTitle, StyledUserImg, UserImgBox } from "./styled";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext.js";
-
+import TimelineContext from "../../contexts/TimelineContext";
 
 export function CreateNewPost() {
     const [link,setUrl] = useState("")
@@ -10,6 +10,11 @@ export function CreateNewPost() {
     const [isLoading,setIsLoading] = useState(false)
     const token = localStorage.getItem("token");
     const { imgUser } = useContext(UserContext);
+
+    const {
+        isPostCreated,
+        setIsPostCreated,
+      } = useContext(TimelineContext);
 
     async function addNewPost(event){
         event.preventDefault()
@@ -20,11 +25,14 @@ export function CreateNewPost() {
     const URL = `${process.env.REACT_APP_API_URL}`;
     const header = { headers: { Authorization: `Bearer ${token}` } };
     const createPost = axios.post(`${URL}/posts`, body, header);
+    setIsPostCreated(true)
 
     createPost.then(response => {
         setIsLoading(false)
         setUrl("")
         setPostDescription("")
+        setIsPostCreated(false)
+
     })
     createPost.catch(err => {
         alert(err)

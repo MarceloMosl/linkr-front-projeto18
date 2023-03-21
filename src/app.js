@@ -7,36 +7,52 @@ import { Login } from "./pages/SignInPage/SignInPage.js";
 import { Timeline } from "./pages/TimelinePage/TimelinePage.js";
 import { UserPage } from "./pages/userPage/userPage.js";
 import UserContext from "./contexts/UserContext.js";
+import TimelineContext from "./contexts/TimelineContext.js";
 import { useState } from "react";
 import Header from "./components/Header/Header.js";
 
+
 function App() {
-  const [logado, setLogado] = useState("");
-  const [imgUser, setImgUser] = useState("");
-  const [headerStatus, setHeaderStatus] = useState(false);
-  return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <UserContext.Provider
-        value={{
-          logado,
-          setLogado,
-          imgUser,
-          setImgUser,
-          headerStatus,
-          setHeaderStatus,
-        }}
-      >
-        <Header />
-        <Routes>
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/" element={<Login />} />
-          <Route path="/user/:id" element={<UserPage />} />
-          <Route path="/timeline" element={<Timeline />} />
-        </Routes>
-      </UserContext.Provider>
-    </BrowserRouter>
-  );
+	const [logado, setLogado] = useState("");
+	const [imgUser, setImgUser] = useState("");
+	const [headerStatus, setHeaderStatus] = useState(false);
+
+	const [isResponseEdited, setIsResponseEdited] = useState(false);
+	const [isPostDeleted, setIsPostDeleted] = useState(false);
+	const [isPostCreated, setIsPostCreated] = useState(false);
+
+	return (
+		<BrowserRouter>
+			<GlobalStyle />
+			<UserContext.Provider
+				value={{
+					logado,
+					setLogado,
+					imgUser,
+					setImgUser,
+					headerStatus,
+					setHeaderStatus,
+				}}>
+				<TimelineContext.Provider
+					value={{
+						isResponseEdited,
+						setIsResponseEdited,
+						isPostDeleted,
+						setIsPostDeleted,
+						isPostCreated,
+						setIsPostCreated,
+					}}>
+					<Header />
+					<Routes>
+						<Route path="/sign-up" element={<SignUp />} />
+						<Route path="/" element={<Login />} />
+						<Route path="/user/:id" element={<UserPage />} />
+						<Route path="/timeline" element={<Timeline />} />
+					</Routes>
+				</TimelineContext.Provider>
+			</UserContext.Provider>
+		</BrowserRouter>
+	);
 }
 
 export default App;
