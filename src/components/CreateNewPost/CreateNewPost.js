@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { CreateNewPostContainer, Input, PostBox, StyledForm, StyledPostTitle, StyledUserImg, UserImgBox } from "./styled";
 import axios from "axios";
+import UserContext from "../../contexts/UserContext.js";
 
 
 export function CreateNewPost() {
@@ -8,6 +9,7 @@ export function CreateNewPost() {
     const [description,setPostDescription] = useState("")
     const [isLoading,setIsLoading] = useState(false)
     const token = localStorage.getItem("token");
+    const { imgUser } = useContext(UserContext);
 
     async function addNewPost(event){
         event.preventDefault()
@@ -36,9 +38,7 @@ export function CreateNewPost() {
         <CreateNewPostContainer data-test="publish-box">
             <UserImgBox>
             <StyledUserImg
-            src={
-                "https://underbuffed.com/wp-content/uploads/2020/06/Persona-4-Golden-Yosuke-Magician-Thumb.jpg"
-            }
+            src={imgUser}
             />
             </UserImgBox>
 
