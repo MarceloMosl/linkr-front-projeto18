@@ -11,7 +11,7 @@ import React from "react";
 export default function Header() {
   const { headerStatus } = useContext(UserContext);
   const [temBotao, setTemBotao] = useState(false);
-  const { logado, setLogado } = useContext(UserContext);
+  // const { logado, setLogado } = useContext(UserContext);
   const [searchBar, setsearchBar] = React.useState("");
   const [userResult, setUserResult] = React.useState([]);
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ export default function Header() {
             <img alt="icon" src={user_url} />
           </div>
         </Container>
-        {temBotao ? <BotaoLogout logado={logado} setLogado={setLogado} /> : ""};
+        {temBotao ? <BotaoLogout/> : ""};
       </>
     );
   }
