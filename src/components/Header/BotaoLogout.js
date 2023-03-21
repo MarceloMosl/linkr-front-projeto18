@@ -1,10 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useContext } from "react";
-import UserContext from "../../contexts/UserContext.js";
 
 export default function BotaoLogout () {
-    // const {setLogado}= useContext(UserContext);
     const navigate = useNavigate();
 
 function logOut() {
