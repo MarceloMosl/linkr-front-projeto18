@@ -9,13 +9,17 @@ import axios from "axios";
 import React from "react";
 
 export default function Header() {
-  const { imgUser } = useContext(UserContext);
   const { headerStatus } = useContext(UserContext);
   const [temBotao, setTemBotao] = useState(false);
   const { logado, setLogado } = useContext(UserContext);
   const [searchBar, setsearchBar] = React.useState("");
   const [userResult, setUserResult] = React.useState([]);
   const navigate = useNavigate();
+  const user_url = localStorage.getItem("user_url");
+  
+
+  
+
 
   useEffect(() => {
     if (searchBar.length >= 3) {
@@ -64,7 +68,7 @@ export default function Header() {
           </section>
           <div onClick={() => setTemBotao(!temBotao)}>
             <BsChevronDown />
-            <img alt="userIcon" src={imgUser} />
+            <img alt="icon" src={user_url} />
           </div>
         </Container>
         {temBotao ? <BotaoLogout logado={logado} setLogado={setLogado} /> : ""};

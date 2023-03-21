@@ -27,6 +27,7 @@ export function Login() {
     promise.then((res) => {
       setIsLoading(false);
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user_url", res.data.user_url);
       alert("Usuário logado com sucesso!");
       navigate("/timeline");
     });
