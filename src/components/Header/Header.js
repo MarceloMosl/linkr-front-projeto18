@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import UserContext from "../../contexts/UserContext.js";
 import { useState } from "react";
-import { BsChevronDown } from "react-icons/bs";
 import BotaoLogout from "./BotaoLogout.js";
 import axios from "axios";
 import React from "react";
+import { FiChevronDown } from "react-icons/fi";
 
 export default function Header() {
   const { headerStatus } = useContext(UserContext);
@@ -65,16 +65,23 @@ export default function Header() {
               ""
             )}
           </section>
-          <div onClick={() => setTemBotao(!temBotao)}>
-            <BsChevronDown />
-            <img alt="icon" src={user_url} />
+
+          
+          <div onClick={() => setTemBotao(!temBotao)} style={{ display: "flex", alignItems: "center" }}>
+            <FiChevronDown style={{ marginRight: "5px", color:"white", fontSize:"30px" }}/>
+            <img alt="icon" src={user_url} style={{ marginRight: "30px" }} />
           </div>
+          
+         
+
         </Container>
         {temBotao ? <BotaoLogout/> : ""};
       </>
     );
   }
 }
+
+
 
 const Container = styled.div`
   width: 100%;
@@ -125,4 +132,6 @@ const Container = styled.div`
     margin-right: 3%;
     margin-top: 1%;
   }
+
+ 
 `;

@@ -19,6 +19,10 @@ export const UserImgBox = styled.div`
 
 export const StyledUserImg = styled.img`
   border-radius: 50%;
+  max-width: 65px;
+  max-height: 65px;
+ 
+ 
 `;
 
 export const PostBox = styled.div`
