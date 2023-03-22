@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TimelineHeaderContainer = styled.div`
-  margin-top: 60px;
+  margin-top: 40px;
   margin-bottom: 20px;
   padding: 15px;
   box-sizing: border-box;

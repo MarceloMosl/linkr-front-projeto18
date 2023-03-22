@@ -4,6 +4,7 @@ export const TimeLineContainer = styled.div`
   display: flex;
   justify-content: center;
   background-color: #4d4d4d;
+  min-height: 100vh;
 
   /* align-items: center; */
 `;

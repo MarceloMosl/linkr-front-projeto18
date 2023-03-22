@@ -28,7 +28,7 @@ export function Timeline() {
           <PostArea>
             <TimelineHeader />
             <CreateNewPost />
-            <DisplayPost></DisplayPost>
+            <DisplayPost/>
           </PostArea>
           <TrendingCard />
         </TimeLineBox>
