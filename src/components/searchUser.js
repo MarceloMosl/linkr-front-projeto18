@@ -67,6 +67,8 @@ export function SearchUser({ userPosts }) {
 const All = styled.div`
   background-color: #4d4d4d;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 
   section {
