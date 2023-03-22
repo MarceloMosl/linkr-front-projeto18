@@ -3,6 +3,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
+import {ThreeDots} from "react-loader-spinner"
 
 export function Login() {
   const navigate = useNavigate();
@@ -75,7 +76,10 @@ export function Login() {
           />
 
           <button type="submit" data-test="login-btn" disabled={isLoading}>
-            Log In
+            {isLoading ? (
+            <ThreeDots width={50} color="#FFFFFF"/>
+           ) : "Log In"}
+            
           </button>
           <p data-test="sign-up-link" onClick={() => navigate("/sign-up")}>
             First time? Create an account!
@@ -204,6 +208,10 @@ const Inputs = styled.div`
   button:disabled {
     background: grey;
     opacity: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
   }
   p {
     font-family: "Lato";

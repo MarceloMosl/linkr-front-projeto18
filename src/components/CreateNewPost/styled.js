@@ -80,6 +80,12 @@ export const StyledForm = styled.form`
 
     cursor: pointer;
   }
+  button:disabled {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+  }
 `;
 
 export const Input = styled.input`

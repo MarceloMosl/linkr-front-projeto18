@@ -23,21 +23,23 @@ export function Timeline() {
 	const { setHeaderStatus } = useContext(UserContext);
 	setHeaderStatus(true);
 
-	return (
-		<>
-			<Header />
-			<TimeLineContainer>
-				<TimeLineBox>
-					<PostArea>
-						<TimelineHeader />
-						<CreateNewPost />
-						<DisplayPost></DisplayPost>
-					</PostArea>
-					<TrendingCard />
-				</TimeLineBox>
-			</TimeLineContainer>
-		</>
-	);
+
+  return (
+    <>
+      <Header />
+      <TimeLineContainer>
+        <TimeLineBox>
+          <PostArea>
+            <TimelineHeader />
+            <CreateNewPost />
+            <DisplayPost/>
+          </PostArea>
+          <TrendingCard />
+        </TimeLineBox>
+      </TimeLineContainer>
+    </>
+  );
+
 }
 
 const PostArea = styled.div`
