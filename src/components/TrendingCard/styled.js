@@ -9,7 +9,7 @@ export const TrendingContainer = styled.div`
   height: 406px;
   background: #171717;
   border-radius: 16px;
-  margin-top: 107px;
+  margin-top: 172px;
   margin-left: 26px;
 
   h1 {
