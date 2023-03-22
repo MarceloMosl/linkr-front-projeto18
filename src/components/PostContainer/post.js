@@ -1,7 +1,7 @@
 import React from "react";
-import styled, { withTheme } from "styled-components";
+import styled from "styled-components";
 import PostDelete from "../PostEdit/postDelete";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { IoPencil } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -90,7 +90,10 @@ export default function DisplayPost() {
             <Like>{obj.total_likes} LIKES</Like>
           </LikePfp>
           <PostText>
-            <OpName onClick={() => navigate(`/user/${obj.user_id}`)} data-teste="username">
+            <OpName
+              onClick={() => navigate(`/user/${obj.user_id}`)}
+              data-teste="username"
+            >
               {obj.username}
             </OpName>
             {editingPostId === obj.id ? (
@@ -124,10 +127,10 @@ export default function DisplayPost() {
           </IconHolder>
 
           <PostMetadata
-            title = {obj.title}
-            url = {obj.post_url}
-            description = {obj.description}
-            image = {obj.image}
+            title={obj.title}
+            url={obj.post_url}
+            description={obj.description}
+            image={obj.image}
           />
         </Post>
       ))}
