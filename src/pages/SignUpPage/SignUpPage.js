@@ -2,13 +2,10 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import UserContext from "../../contexts/UserContext.js";
 
 export function SignUp() {
   const navigate = useNavigate();
   const [desabilitado, setDesabilitado] = useState(false);
-  const { setImgUser } = useContext(UserContext);
 
   const [cadastrar, setCadastrar] = useState({
     email: "",
@@ -28,12 +25,13 @@ export function SignUp() {
 
     setDesabilitado(true);
 
+    
+
     const promise = axios.post(
       `${process.env.REACT_APP_API_URL}/sign-up`,
       cadastrar
     );
     promise.then((res) => {
-      setImgUser(user_url);
       alert("Usuário cadastrado com sucesso!");
       navigate("/");
     });

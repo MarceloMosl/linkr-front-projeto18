@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { CreateNewPostContainer, Input, PostBox, StyledForm, StyledPostTitle, StyledUserImg, UserImgBox } from "./styled";
 import axios from "axios";
-import UserContext from "../../contexts/UserContext.js";
 import TimelineContext from "../../contexts/TimelineContext";
 
 export function CreateNewPost() {
@@ -9,7 +8,10 @@ export function CreateNewPost() {
     const [description,setPostDescription] = useState("")
     const [isLoading,setIsLoading] = useState(false)
     const token = localStorage.getItem("token");
-    const { imgUser } = useContext(UserContext);
+    const user_url = localStorage.getItem("user_url");
+    console.log(user_url);
+
+
 
     const {
         isPostCreated,
@@ -46,7 +48,7 @@ export function CreateNewPost() {
         <CreateNewPostContainer data-test="publish-box">
             <UserImgBox>
             <StyledUserImg
-            src={imgUser}
+            src={user_url}
             />
             </UserImgBox>
 

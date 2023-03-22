@@ -79,7 +79,7 @@ export default function DisplayPost() {
   return (
     <Main>
       {timelineContent.map((obj) => (
-        <Post key={obj.id} postId={obj.id}>
+        <Post key={obj.id} postId={obj.id} data-teste="post">
           <LikePfp>
             <OpPfp
               onClick={() => navigate(`/user/${obj.user_id}`)}
@@ -89,7 +89,7 @@ export default function DisplayPost() {
             <Like>{obj.total_likes} LIKES</Like>
           </LikePfp>
           <PostText>
-            <OpName onClick={() => navigate(`/user/${obj.user_id}`)}>
+            <OpName onClick={() => navigate(`/user/${obj.user_id}`)} data-teste="username">
               {obj.username}
             </OpName>
             {editingPostId === obj.id ? (
@@ -105,7 +105,7 @@ export default function DisplayPost() {
                 />
               </EditInput>
             ) : (
-              <PostMessage>
+              <PostMessage data-teste="description">
                 <BodyPostMessageStyled body={obj.headline} />
               </PostMessage>
             )}
