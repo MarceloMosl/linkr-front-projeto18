@@ -53,7 +53,7 @@ function PostDelete({ id, setIsPostDeleted , isPostDeleted}) {
 							<CancelButton onClick={() => setIsModalOpen(false)}>
 								No, go back
 							</CancelButton>
-							<DeleteButton onClick={handleDeleteClick}>
+							<DeleteButton onClick={handleDeleteClick} data-test="confirm">
 								Yes, delete it
 							</DeleteButton>
 						</ButtonContainer>
