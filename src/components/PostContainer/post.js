@@ -10,6 +10,7 @@ import useFetchTimeline from "../hooks/fetchTimeline.js";
 import TimelineContext from "../../contexts/TimelineContext";
 import PostMetadata from "./PostMetadata";
 
+
 export default function DisplayPost() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -79,7 +80,10 @@ export default function DisplayPost() {
 
   return (
     <Main>
-      {timelineContent.map((obj) => (
+      {timelineContent.length == 0 
+      ? <p data-test="message">There are no posts yet</p> 
+      : 
+      timelineContent.map((obj) => (
         <Post key={obj.id} postId={obj.id} data-teste="post">
           <LikePfp>
             <OpPfp
@@ -133,13 +137,25 @@ export default function DisplayPost() {
             image={obj.image}
           />
         </Post>
-      ))}
+      ))
+      }
     </Main>
   );
 }
 
 const Main = styled.div`
   gap: 15px;
+
+  p {
+    font-family: "Oswald";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+
+    color: #ffffff;
+  }
 `;
 
 const Post = styled.div`
@@ -244,3 +260,4 @@ function BodyPostMessageStyled({ body }) {
     </ReactTagify>
   );
 }
+

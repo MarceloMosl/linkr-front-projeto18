@@ -19,6 +19,10 @@ export const UserImgBox = styled.div`
 
 export const StyledUserImg = styled.img`
   border-radius: 50%;
+  max-width: 65px;
+  max-height: 65px;
+ 
+ 
 `;
 
 export const PostBox = styled.div`
@@ -75,6 +79,12 @@ export const StyledForm = styled.form`
     color: #ffffff;
 
     cursor: pointer;
+  }
+  button:disabled {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
   }
 `;
 

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {ThreeDots} from "react-loader-spinner"
 
 export function SignUp() {
   const navigate = useNavigate();
@@ -98,7 +99,9 @@ export function SignUp() {
           />
 
           <button type="submit" disabled={desabilitado} data-test="sign-up-btn">
-            Sign Up
+           {desabilitado ? (
+            <ThreeDots width={50} color="#FFFFFF"/>
+           ) : "Sign Up"}
           </button>
           <p data-test="login-link" onClick={() => navigate("/")}>
             Switch back to log in
@@ -227,6 +230,10 @@ const Inputs = styled.div`
   button:disabled {
     background: grey;
     opacity: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
   }
   p {
     font-family: "Lato";
