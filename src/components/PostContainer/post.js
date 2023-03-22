@@ -1,13 +1,14 @@
 import React from "react";
 import styled, { withTheme } from "styled-components";
-import PostDelete from "./PostEdit/postDelete";
+import PostDelete from "../PostEdit/postDelete";
 import { useState, useEffect, useContext } from "react";
 import { IoPencil } from "react-icons/io5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
-import useFetchTimeline from "./hooks/fetchTimeline";
-import TimelineContext from "../contexts/TimelineContext";
+import useFetchTimeline from "../hooks/fetchTimeline.js";
+import TimelineContext from "../../contexts/TimelineContext";
+import PostMetadata from "./PostMetadata";
 
 export default function DisplayPost() {
   const navigate = useNavigate();
@@ -121,6 +122,13 @@ export default function DisplayPost() {
               isPostDeleted={isPostDeleted}
             />
           </IconHolder>
+
+          <PostMetadata
+            title = {obj.title}
+            url = {obj.post_url}
+            description = {obj.description}
+            image = {obj.image}
+          />
         </Post>
       ))}
     </Main>

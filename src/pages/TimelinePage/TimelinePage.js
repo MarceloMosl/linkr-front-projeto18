@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import DisplayPost from "../../components/post.js";
+import DisplayPost from "../../components/PostContainer/post.js";
 import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
 import { TimeLineBox, TimeLineContainer } from "./styled.js";
 import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.js";
