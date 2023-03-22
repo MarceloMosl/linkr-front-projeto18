@@ -11,7 +11,7 @@ export function CreateNewPost() {
     const user_url = localStorage.getItem("user_url");
 
     const {
-        isPostCreated,
+        isPostCreated,  
         setIsPostCreated,
             } = useContext(TimelineContext);
 
