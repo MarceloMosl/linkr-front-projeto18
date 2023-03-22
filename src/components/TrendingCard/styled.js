@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
 export const TrendingContainer = styled.div`
-  width: 301px;
+  @media (max-width: 950px) {
+    display: none;
+  }
+  height: 100vh;
+  width: 25vw;
   height: 406px;
   background: #171717;
   border-radius: 16px;
-  margin-top:107px;
-  margin-left:26px;
+  margin-top: 107px;
+  margin-left: 26px;
 
   h1 {
     font-family: "Oswald";
@@ -23,7 +27,7 @@ export const TrendingContainer = styled.div`
   div {
     width: 100%;
     border: 1px solid #484848;
-    margin-bottom:22px;
+    margin-bottom: 22px;
   }
 
   /* @media (min-width:375px) {

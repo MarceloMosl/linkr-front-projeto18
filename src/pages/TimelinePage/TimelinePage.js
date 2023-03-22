@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import DisplayPost from "../../components/post.js";
 import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
@@ -20,34 +19,31 @@ urlMetadata(url).then(metadata => {
 export function Timeline() {
   const { setHeaderStatus } = useContext(UserContext);
   setHeaderStatus(true);
-  
+
   return (
     <>
-      <Header/>
-    <TimeLineContainer>
-      <TimeLineBox>
-      <PostArea>
-      <TimelineHeader/>
-      <CreateNewPost/>
-        <DisplayPost></DisplayPost>
-      </PostArea>
-      <TrendingCard />
-      </TimeLineBox>
-    </TimeLineContainer>
+      <Header />
+      <TimeLineContainer>
+        <TimeLineBox>
+          <PostArea>
+            <TimelineHeader />
+            <CreateNewPost />
+            <DisplayPost></DisplayPost>
+          </PostArea>
+          <TrendingCard />
+        </TimeLineBox>
+      </TimeLineContainer>
     </>
   );
 }
 
 const PostArea = styled.div`
-  /* display: flex;
-  width: 100%;
-  height: 900px;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #4d4d4d;
-  box-sizing: border-box; */
+  @media (max-width: 950px) {
+    margin: auto;
+  }
+  @media (max-width: 750px) {
+    margin: auto;
+    width: 100vw;
+  }
+  width: 70%;
 `;
-
-  
-

@@ -77,7 +77,7 @@ export default function DisplayPost() {
   }
 
   return (
-    <div>
+    <Main>
       {timelineContent.map((obj) => (
         <Post key={obj.id} postId={obj.id}>
           <LikePfp>
@@ -123,23 +123,23 @@ export default function DisplayPost() {
           </IconHolder>
         </Post>
       ))}
-    </div>
+    </Main>
   );
 }
 
+const Main = styled.div`
+  gap: 15px;
+`;
+
 const Post = styled.div`
   display: flex;
-  background-color: #171717;
   border-radius: 16px;
-  width: 611px;
+  background-color: #171717;
+  width: 100%;
   height: 276px;
-  padding-left: 18px;
-  padding-top: 17px;
-  padding-bottom: 20px;
-  padding-right: 21px;
+  padding: 20px;
   box-sizing: border-box;
   margin-bottom: 16px;
-  position: relative;
 `;
 const OpPfp = styled.img`
   display: flex;
