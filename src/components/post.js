@@ -140,6 +140,7 @@ const Post = styled.div`
   padding: 20px;
   box-sizing: border-box;
   margin-bottom: 16px;
+  position: relative;
 `;
 const OpPfp = styled.img`
   display: flex;
