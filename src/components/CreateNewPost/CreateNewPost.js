@@ -19,7 +19,12 @@ export function CreateNewPost() {
   const token = localStorage.getItem("token");
   const user_url = localStorage.getItem("user_url");
 
-  const { isPostCreated, setIsPostCreated } = useContext(TimelineContext);
+
+    const {
+        isPostCreated,  
+        setIsPostCreated,
+            } = useContext(TimelineContext);
+
 
   async function addNewPost(event) {
     event.preventDefault();

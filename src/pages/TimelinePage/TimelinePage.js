@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import DisplayPost from "../../components/PostContainer/post.js";
 import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
@@ -7,18 +7,22 @@ import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.j
 import { CreateNewPost } from "../../components/CreateNewPost/CreateNewPost.js";
 import Header from "../../components/Header/Header.js";
 import UserContext from "../../contexts/UserContext.js";
+import { useNavigate, Link } from "react-router-dom";
 
-/*
-const url = 'https://www.google.com';
-const urlMetadata = require('url-metadata');
-urlMetadata(url).then(metadata => {
-    console.log(metadata)
-}
-)
-*/
 export function Timeline() {
-  const { setHeaderStatus } = useContext(UserContext);
-  setHeaderStatus(true);
+	const token = localStorage.getItem("token");
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!token) {
+			alert("authentication failed, please login");
+			navigate("/");
+		}
+	}, [token]);
+
+	const { setHeaderStatus } = useContext(UserContext);
+	setHeaderStatus(true);
+
 
   return (
     <>
@@ -35,15 +39,16 @@ export function Timeline() {
       </TimeLineContainer>
     </>
   );
+
 }
 
 const PostArea = styled.div`
-  @media (max-width: 950px) {
-    margin: auto;
-  }
-  @media (max-width: 750px) {
-    margin: auto;
-    width: 100vw;
-  }
-  width: 70%;
+	@media (max-width: 950px) {
+		margin: auto;
+	}
+	@media (max-width: 750px) {
+		margin: auto;
+		width: 100vw;
+	}
+	width: 70%;
 `;
