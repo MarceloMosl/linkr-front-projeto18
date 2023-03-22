@@ -9,8 +9,9 @@ export function CreateNewPost() {
     const [isLoading,setIsLoading] = useState(false)
     const token = localStorage.getItem("token");
     const user_url = localStorage.getItem("user_url");
+   
 
-    
+
 
     const {
         isPostCreated,
