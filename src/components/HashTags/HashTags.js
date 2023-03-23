@@ -29,10 +29,13 @@ export default function HashTagsList() {
     navigate(`/hashtag/${clickedHashtag}`);
   }
 
+  const hashtagLink = window.location.hash.substr(1);
+
   return (
     <HashTagsContainer>
-      {hashtagContent.map((h) => (
+      {hashtagContent.map((h, id) => (
         <HashTags
+          key={id}
           onClick={() => handleHashTagClick(h.name)}
           data-test="hashtag"
         >

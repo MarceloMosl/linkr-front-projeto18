@@ -27,7 +27,6 @@ export function Hashtag() {
 				<TimeLineBox>
 					<PostArea>
 						<TimelineHeaderContainer><h1>hashtag</h1></TimelineHeaderContainer>
-						<DisplayPost />
 					</PostArea>
 					<TrendingCard />
 				</TimeLineBox>
