@@ -9,9 +9,11 @@ import Header from "../../components/Header/Header.js";
 import UserContext from "../../contexts/UserContext.js";
 import { useNavigate } from "react-router-dom";
 
-export function Timeline() {
-  const token = localStorage.getItem("token");
-  const navigate = useNavigate();
+
+export function Timeline(setRenderHashTag) {
+	const token = localStorage.getItem("token");
+	const navigate = useNavigate();
+
 
   useEffect(() => {
     if (!token) {
@@ -31,7 +33,11 @@ export function Timeline() {
           <PostArea>
             <TimelineHeader />
             <CreateNewPost />
-            <DisplayPost />
+
+            <DisplayPost setRenderHashTag={setRenderHashTag}/>
+
+            
+
           </PostArea>
           <TrendingCard />
         </TimeLineBox>

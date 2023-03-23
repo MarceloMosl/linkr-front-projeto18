@@ -9,49 +9,52 @@ import UserContext from "./contexts/UserContext.js";
 import TimelineContext from "./contexts/TimelineContext.js";
 import { useState } from "react";
 import Header from "./components/Header/Header.js";
-import { Hashtag } from "./pages/HashtagsPage/HashtagPage.js";
+
+import HashTagPage from "./pages/HashTagsPage/HashTagsPage.js";
+
+
 
 function App() {
   const [logado, setLogado] = useState("");
   const [headerStatus, setHeaderStatus] = useState(false);
 
-  const [isResponseEdited, setIsResponseEdited] = useState(false);
-  const [isPostDeleted, setIsPostDeleted] = useState(false);
-  const [isPostCreated, setIsPostCreated] = useState(false);
 
-  return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <UserContext.Provider
-        value={{
-          logado,
-          setLogado,
-          headerStatus,
-          setHeaderStatus,
-        }}
-      >
-        <TimelineContext.Provider
-          value={{
-            isResponseEdited,
-            setIsResponseEdited,
-            isPostDeleted,
-            setIsPostDeleted,
-            isPostCreated,
-            setIsPostCreated,
-          }}
-        >
-          <Header />
-          <Routes>
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/" element={<Login />} />
-            <Route path="/user/:id" element={<UserPage />} />
-            <Route path="/timeline" element={<Timeline />} />
-            <Route path="/hashtag" element={<Hashtag />} />
-          </Routes>
-        </TimelineContext.Provider>
-      </UserContext.Provider>
-    </BrowserRouter>
-  );
+	const [isResponseEdited, setIsResponseEdited] = useState(false);
+	const [isPostDeleted, setIsPostDeleted] = useState(false);
+	const [isPostCreated, setIsPostCreated] = useState(false);
+	const [renderHashTag, setRenderHashTag] = useState("")
+
+	return (
+		<BrowserRouter>
+			<GlobalStyle />
+			<UserContext.Provider
+				value={{
+					logado,
+					setLogado,
+					headerStatus,
+					setHeaderStatus,
+				}}>
+				<TimelineContext.Provider
+					value={{
+						isResponseEdited,
+						setIsResponseEdited,
+						isPostDeleted,
+						setIsPostDeleted,
+						isPostCreated,
+						setIsPostCreated,
+					}}>
+					<Header />
+					<Routes>
+						<Route path="/sign-up" element={<SignUp />} />
+						<Route path="/" element={<Login />} />
+						<Route path="/user/:id" element={<UserPage />} />
+						<Route path="/timeline" element={<Timeline setRenderHashTag={setRenderHashTag}/>} />
+						<Route path="/hashtag/:hashtag" element={<HashTagPage renderHashTag={renderHashTag} />}/>
+					</Routes>
+				</TimelineContext.Provider>
+			</UserContext.Provider>
+		</BrowserRouter>
+	);
 }
 
 export default App;
