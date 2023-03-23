@@ -10,7 +10,6 @@ import useFetchTimeline from "../hooks/fetchTimeline.js";
 import TimelineContext from "../../contexts/TimelineContext";
 import PostMetadata from "./PostMetadata";
 
-
 export default function DisplayPost() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -80,65 +79,68 @@ export default function DisplayPost() {
 
   return (
     <Main>
-      {timelineContent.length == 0 
-      ? <p data-test="message">There are no posts yet</p> 
-      : 
-      timelineContent.map((obj) => (
-        <Post key={obj.id} postId={obj.id} data-teste="post">
-          <LikePfp>
-            <OpPfp
-              onClick={() => navigate(`/user/${obj.user_id}`)}
-              src={obj.user_url}
-            />
-            <ion-icon name="heart-outline" size="small"></ion-icon>
-            <Like>{obj.total_likes} LIKES</Like>
-          </LikePfp>
-          <PostText>
-            <OpName
-              onClick={() => navigate(`/user/${obj.user_id}`)}
-              data-teste="username"
-            >
-              {obj.username}
-            </OpName>
-            {editingPostId === obj.id ? (
-              <EditInput
-                onKeyDown={onKeyPressed}
-                onSubmit={(event) => handleEditSubmit(event, obj.id)}
-              >
-                <input
-                  type="text"
-                  value={editedMessage}
-                  onChange={handleInputChange}
-                  data-text="edit-input"
-                />
-              </EditInput>
-            ) : (
-              <PostMessage data-teste="description">
-                <BodyPostMessageStyled body={obj.headline} />
-              </PostMessage>
-            )}
-          </PostText>
-          <IconHolder>
-            <PencilIcon
-              onClick={() => handleEditClick(obj.id)}
-              data-text="edit-btn"
-            />
-            <PostDelete
-              id={obj.id}
-              setIsPostDeleted={setIsPostDeleted}
-              isPostDeleted={isPostDeleted}
-            />
-          </IconHolder>
+      {timelineContent.length == 0 ? (
+        <p data-test="message">There are no posts yet</p>
+      ) : (
+        timelineContent.map((obj) => (
+          <Post key={obj.id} postId={obj.id} data-teste="post">
+            <LikePfp>
+              <OpPfp
+                onClick={() => navigate(`/user/${obj.user_id}`)}
+                src={obj.user_url}
+              />
+              <ion-icon name="heart-outline" size="small"></ion-icon>
+              <Like>{obj.total_likes} LIKES</Like>
+            </LikePfp>
 
-          <PostMetadata
-            title={obj.title}
-            url={obj.post_url}
-            description={obj.description}
-            image={obj.image}
-          />
-        </Post>
-      ))
-      }
+            <PostContent>
+              <PostText>
+                <OpName
+                  onClick={() => navigate(`/user/${obj.user_id}`)}
+                  data-teste="username"
+                >
+                  {obj.username}
+                </OpName>
+                {editingPostId === obj.id ? (
+                  <EditInput
+                    onKeyDown={onKeyPressed}
+                    onSubmit={(event) => handleEditSubmit(event, obj.id)}
+                  >
+                    <input
+                      type="text"
+                      value={editedMessage}
+                      onChange={handleInputChange}
+                      data-text="edit-input"
+                    />
+                  </EditInput>
+                ) : (
+                  <PostMessage data-teste="description">
+                    <BodyPostMessageStyled body={obj.headline} />
+                  </PostMessage>
+                )}
+              </PostText>
+              <IconHolder>
+                <PencilIcon
+                  onClick={() => handleEditClick(obj.id)}
+                  data-text="edit-btn"
+                />
+                <PostDelete
+                  id={obj.id}
+                  setIsPostDeleted={setIsPostDeleted}
+                  isPostDeleted={isPostDeleted}
+                />
+              </IconHolder>
+
+              <PostMetadata
+                title={obj.title}
+                url={obj.post_url}
+                description={obj.description}
+                image={obj.image}
+              />
+            </PostContent>
+          </Post>
+        ))
+      )}
     </Main>
   );
 }
@@ -163,12 +165,18 @@ const Post = styled.div`
   border-radius: 16px;
   background-color: #171717;
   width: 100%;
-  height: 276px;
   padding: 20px;
   box-sizing: border-box;
   margin-bottom: 16px;
   position: relative;
 `;
+
+const PostContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
 const OpPfp = styled.img`
   display: flex;
   width: 50px;
@@ -198,6 +206,7 @@ const PostMessage = styled.div`
   line-height: 20px;
   color: #b7b7b7;
   margin-top: 8px;
+  word-break: break-all;
 `;
 const Like = styled.p`
   margin-top: 4px;
@@ -260,4 +269,3 @@ function BodyPostMessageStyled({ body }) {
     </ReactTagify>
   );
 }
-

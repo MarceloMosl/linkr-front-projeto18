@@ -1,31 +1,26 @@
 import styled from "styled-components";
 
-
-export default function PostMetadata({image, url, title, description}){
-    return(
-    <LinkContainer href={url} target="_blank" data-test="link" >
-        <div>
-            <h1>{title}</h1>
-            <h2>{description}</h2>
-            <h3>{url}</h3>
-        </div>
-        <ImageLink src={image} />
+export default function PostMetadata({ image, url, title, description }) {
+  return (
+    <LinkContainer href={url} target="_blank" data-test="link">
+      <div>
+        <h1>{title}</h1>
+        <h2>{description}</h2>
+        <h3>{url}</h3>
+      </div>
+      <ImageLink src={image} />
     </LinkContainer>
-)
+  );
 }
 
 export const LinkContainer = styled.a`
   display: flex;
-  bottom:20px;
-  left:100px;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 80%;
-  height: 155px;
+  margin-left: 10px;
+  justify-content: space-between;
+  width: 100%;
   border: 1px solid #4d4d4d;
   border-radius: 11px;
-  position: absolute;
-  text-decoration:none;
+  text-decoration: none;
   h1,
   h2,
   h3 {
@@ -55,12 +50,8 @@ export const LinkContainer = styled.a`
   }
 `;
 
-
 const ImageLink = styled.img`
-    position: absolute;
-    right: 0;
-    width: 155px;
-    height: 155px;
-    border-radius: 0px 11px 11px 0px;
-
+  width: 155px;
+  height: 155px;
+  border-radius: 0px 11px 11px 0px;
 `;
