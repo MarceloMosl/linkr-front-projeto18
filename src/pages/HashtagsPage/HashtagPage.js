@@ -2,8 +2,6 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import DisplayPost from "../../components/PostContainer/post.js";
 import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
-import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.js";
-import Header from "../../components/Header/Header.js";
 import UserContext from "../../contexts/UserContext.js";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -27,7 +25,6 @@ export function Hashtag() {
 				<TimeLineBox>
 					<PostArea>
 						<TimelineHeaderContainer><h1>hashtag</h1></TimelineHeaderContainer>
-						<DisplayPost />
 					</PostArea>
 					<TrendingCard />
 				</TimeLineBox>
