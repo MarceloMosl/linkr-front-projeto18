@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SearchUser } from "./components/searchUser.js";
 import { SignUp } from "./pages/SignUpPage/SignUpPage.js";
 import { Login } from "./pages/SignInPage/SignInPage.js";
 import { Timeline } from "./pages/TimelinePage/TimelinePage.js";
@@ -13,44 +12,46 @@ import Header from "./components/Header/Header.js";
 import { Hashtag } from "./pages/HashtagsPage/HashtagPage.js";
 
 function App() {
-	const [logado, setLogado] = useState("");
-	const [headerStatus, setHeaderStatus] = useState(false);
+  const [logado, setLogado] = useState("");
+  const [headerStatus, setHeaderStatus] = useState(false);
 
-	const [isResponseEdited, setIsResponseEdited] = useState(false);
-	const [isPostDeleted, setIsPostDeleted] = useState(false);
-	const [isPostCreated, setIsPostCreated] = useState(false);
+  const [isResponseEdited, setIsResponseEdited] = useState(false);
+  const [isPostDeleted, setIsPostDeleted] = useState(false);
+  const [isPostCreated, setIsPostCreated] = useState(false);
 
-	return (
-		<BrowserRouter>
-			<GlobalStyle />
-			<UserContext.Provider
-				value={{
-					logado,
-					setLogado,
-					headerStatus,
-					setHeaderStatus,
-				}}>
-				<TimelineContext.Provider
-					value={{
-						isResponseEdited,
-						setIsResponseEdited,
-						isPostDeleted,
-						setIsPostDeleted,
-						isPostCreated,
-						setIsPostCreated,
-					}}>
-					<Header />
-					<Routes>
-						<Route path="/sign-up" element={<SignUp />} />
-						<Route path="/" element={<Login />} />
-						<Route path="/user/:id" element={<UserPage />} />
-						<Route path="/timeline" element={<Timeline />} />
-						<Route path="/hashtag" element={<Hashtag />} />
-					</Routes>
-				</TimelineContext.Provider>
-			</UserContext.Provider>
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <GlobalStyle />
+      <UserContext.Provider
+        value={{
+          logado,
+          setLogado,
+          headerStatus,
+          setHeaderStatus,
+        }}
+      >
+        <TimelineContext.Provider
+          value={{
+            isResponseEdited,
+            setIsResponseEdited,
+            isPostDeleted,
+            setIsPostDeleted,
+            isPostCreated,
+            setIsPostCreated,
+          }}
+        >
+          <Header />
+          <Routes>
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/user/:id" element={<UserPage />} />
+            <Route path="/timeline" element={<Timeline />} />
+            <Route path="/hashtag" element={<Hashtag />} />
+          </Routes>
+        </TimelineContext.Provider>
+      </UserContext.Provider>
+    </BrowserRouter>
+  );
 }
 
 export default App;

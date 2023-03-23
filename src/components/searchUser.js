@@ -7,6 +7,8 @@ export function SearchUser({ userPosts }) {
   const [isLiked, setIsLiked] = React.useState("white");
   setHeaderStatus(true);
 
+  console.log(userPosts);
+
   if (userPosts.username !== undefined) {
     return (
       <All>

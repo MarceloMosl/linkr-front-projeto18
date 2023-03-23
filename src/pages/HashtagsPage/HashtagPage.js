@@ -1,69 +1,66 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-import DisplayPost from "../../components/PostContainer/post.js";
 import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
-import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.js";
-import Header from "../../components/Header/Header.js";
 import UserContext from "../../contexts/UserContext.js";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function Hashtag() {
-	const token = localStorage.getItem("token");
-	const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		if (!token) {
-			alert("authentication failed, please login");
-			navigate("/");
-		}
-	}, [token]);
+  useEffect(() => {
+    if (!token) {
+      alert("authentication failed, please login");
+      navigate("/");
+    }
+  }, [token]);
 
-	const { setHeaderStatus } = useContext(UserContext);
-	setHeaderStatus(true);
+  const { setHeaderStatus } = useContext(UserContext);
+  setHeaderStatus(true);
 
-	return (
-		<>
-			<TimeLineContainer>
-				<TimeLineBox>
-					<PostArea>
-						<TimelineHeaderContainer><h1>hashtag</h1></TimelineHeaderContainer>
-					</PostArea>
-					<TrendingCard />
-				</TimeLineBox>
-			</TimeLineContainer>
-		</>
-	);
+  return (
+    <>
+      <TimeLineContainer>
+        <TimeLineBox>
+          <PostArea>
+            <TimelineHeaderContainer>
+              <h1>hashtag</h1>
+            </TimelineHeaderContainer>
+          </PostArea>
+          <TrendingCard />
+        </TimeLineBox>
+      </TimeLineContainer>
+    </>
+  );
 }
 
 const TimeLineContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	background-color: #4d4d4d;
-	min-height: 100vh;
-
+  display: flex;
+  justify-content: center;
+  background-color: #4d4d4d;
+  min-height: 100vh;
 `;
 
 const TimeLineBox = styled.div`
-	display: flex;
-	justify-content: space-between;
-	width: 80vw;
-	margin: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+  margin: auto;
 
-	@media (max-width: 950px) {
-		width: 100vw;
-	}
+  @media (max-width: 950px) {
+    width: 100vw;
+  }
 `;
 
-
 const PostArea = styled.div`
-	@media (max-width: 950px) {
-		margin: auto;
-	}
-	@media (max-width: 750px) {
-		margin: auto;
-		width: 100vw;
-	}
-	width: 70%;
+  @media (max-width: 950px) {
+    margin: auto;
+  }
+  @media (max-width: 750px) {
+    margin: auto;
+    width: 100vw;
+  }
+  width: 70%;
 `;
 
 const TimelineHeaderContainer = styled.div`

@@ -22,7 +22,6 @@ export default function DisplayPost() {
     isPostDeleted,
     setIsPostDeleted,
     isPostCreated,
-    setIsPostCreated,
   } = useContext(TimelineContext);
 
   const timelineContent = useFetchTimeline(
