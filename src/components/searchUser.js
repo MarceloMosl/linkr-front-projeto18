@@ -4,36 +4,14 @@ import UserContext from "../contexts/UserContext";
 
 export function SearchUser({ userPosts }) {
   const { setHeaderStatus } = useContext(UserContext);
-  const [isLiked, setIsLiked] = React.useState("white");
   setHeaderStatus(true);
-
-  console.log(userPosts);
-
-  if (userPosts.username !== undefined) {
-    return (
-      <All>
-        <section>
-          <img src={userPosts[0].user_url} alt="userPic" />
-          <span>
-            {userPosts[0].username}
-            's posts
-          </span>
-        </section>
-      </All>
-    );
-  }
-
   function Posts(a) {
-    if (a.usuario_liked === true) {
-      setIsLiked("red");
-    }
-
     return (
       <Post data-test="post">
         <LikePfp>
           <OpPfp src={a.user_url} />
           <ion-icon
-            style={{ color: isLiked }}
+            style={{ color: a.usuario_liked ? "red" : "" }}
             name="heart"
             size="small"
           ></ion-icon>
@@ -67,20 +45,18 @@ export function SearchUser({ userPosts }) {
 
 const All = styled.div`
   background-color: #4d4d4d;
-  height: 100vh;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
 
   section {
     display: flex;
     width: 611px;
+    margin: auto;
     margin-top: 80px;
     font-weight: 700;
     font-size: 43px;
     color: white;
-    margin-bottom: 41px;
     align-items: center;
     gap: 5px;
     img {
