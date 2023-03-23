@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SearchUser } from "./components/searchUser.js";
 import { SignUp } from "./pages/SignUpPage/SignUpPage.js";
 import { Login } from "./pages/SignInPage/SignInPage.js";
 import { Timeline } from "./pages/TimelinePage/TimelinePage.js";
@@ -10,12 +9,15 @@ import UserContext from "./contexts/UserContext.js";
 import TimelineContext from "./contexts/TimelineContext.js";
 import { useState } from "react";
 import Header from "./components/Header/Header.js";
+
 import HashTagPage from "./pages/HashTagsPage/HashTagsPage.js";
 
 
+
 function App() {
-	const [logado, setLogado] = useState("");
-	const [headerStatus, setHeaderStatus] = useState(false);
+  const [logado, setLogado] = useState("");
+  const [headerStatus, setHeaderStatus] = useState(false);
+
 
 	const [isResponseEdited, setIsResponseEdited] = useState(false);
 	const [isPostDeleted, setIsPostDeleted] = useState(false);

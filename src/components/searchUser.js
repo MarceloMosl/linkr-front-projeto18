@@ -6,6 +6,7 @@ export function SearchUser({ userPosts }) {
   const { setHeaderStatus } = useContext(UserContext);
   const [isLiked, setIsLiked] = React.useState("white");
   setHeaderStatus(true);
+
   console.log(userPosts);
 
   if (userPosts.username !== undefined) {
@@ -58,7 +59,7 @@ export function SearchUser({ userPosts }) {
       </section>
 
       {userPosts[0].headline === undefined
-        ? ""
+        ? "No posts yet"
         : userPosts.map((a) => Posts(a))}
     </All>
   );
@@ -66,19 +67,19 @@ export function SearchUser({ userPosts }) {
 
 const All = styled.div`
   background-color: #4d4d4d;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 
   section {
     display: flex;
     width: 611px;
-    margin: auto;
+    margin-top: 80px;
     font-weight: 700;
     font-size: 43px;
     color: white;
-    padding-top: 150px;
     margin-bottom: 41px;
     align-items: center;
     gap: 5px;

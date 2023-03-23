@@ -20,7 +20,7 @@ export function UserPage() {
       setUsersPosts(res.data);
     });
     promise.catch((err) => alert(err));
-  }, [id]);
+  });
 
   return <SearchUser userPosts={userPosts} />;
 }

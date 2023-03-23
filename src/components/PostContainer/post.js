@@ -22,7 +22,6 @@ export default function DisplayPost(setRenderHashTag) {
     isPostDeleted,
     setIsPostDeleted,
     isPostCreated,
-    setIsPostCreated,
   } = useContext(TimelineContext);
 
   const timelineContent = useFetchTimeline(
@@ -67,7 +66,6 @@ export default function DisplayPost(setRenderHashTag) {
       header
     );
     updatePromise.then((success) => {
-      console.log(success);
       setIsResponseEdited(success.data);
     });
     updatePromise.catch((error) => {
@@ -77,9 +75,22 @@ export default function DisplayPost(setRenderHashTag) {
     setEditedMessage("");
   }
 
+  async function likePost(post) {
+    const header = { headers: { Authorization: `Bearer ${token}` } };
+
+    const promise = axios.post(
+      `${process.env.REACT_APP_API_URL}/like`,
+      { post_id: post.id, token },
+      header
+    );
+
+    promise.then(() => window.location.reload());
+    promise.catch((err) => alert(err));
+  }
+
   return (
     <Main>
-      {timelineContent.length == 0 ? (
+      {timelineContent.length === 0 ? (
         <p data-test="message">There are no posts yet</p>
       ) : (
         timelineContent.map((obj) => (
@@ -89,7 +100,11 @@ export default function DisplayPost(setRenderHashTag) {
                 onClick={() => navigate(`/user/${obj.user_id}`)}
                 src={obj.user_url}
               />
-              <ion-icon name="heart-outline" size="small"></ion-icon>
+              <ion-icon
+                onClick={() => likePost(obj)}
+                name="heart-outline"
+                size="small"
+              ></ion-icon>
               <Like>{obj.total_likes} LIKES</Like>
             </LikePfp>
 

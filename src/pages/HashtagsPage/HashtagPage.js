@@ -1,19 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-import DisplayPost from "../../components/PostContainer/post.js";
 import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
-import { TimeLineBox, TimeLineContainer } from "./styled.js";
-import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.js";
-import { CreateNewPost } from "../../components/CreateNewPost/CreateNewPost.js";
-import Header from "../../components/Header/Header.js";
 import UserContext from "../../contexts/UserContext.js";
 import { useNavigate } from "react-router-dom";
 
-
-export function Timeline(setRenderHashTag) {
-	const token = localStorage.getItem("token");
-	const navigate = useNavigate();
-
+export function Hashtag() {
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!token) {
@@ -27,17 +20,12 @@ export function Timeline(setRenderHashTag) {
 
   return (
     <>
-      <Header />
       <TimeLineContainer>
         <TimeLineBox>
           <PostArea>
-            <TimelineHeader />
-            <CreateNewPost />
-
-            <DisplayPost setRenderHashTag={setRenderHashTag}/>
-
-            
-
+            <TimelineHeaderContainer>
+              <h1>hashtag</h1>
+            </TimelineHeaderContainer>
           </PostArea>
           <TrendingCard />
         </TimeLineBox>
@@ -45,6 +33,24 @@ export function Timeline(setRenderHashTag) {
     </>
   );
 }
+
+const TimeLineContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: #4d4d4d;
+  min-height: 100vh;
+`;
+
+const TimeLineBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+  margin: auto;
+
+  @media (max-width: 950px) {
+    width: 100vw;
+  }
+`;
 
 const PostArea = styled.div`
   @media (max-width: 950px) {
@@ -55,4 +61,19 @@ const PostArea = styled.div`
     width: 100vw;
   }
   width: 70%;
+`;
+
+const TimelineHeaderContainer = styled.div`
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding: 15px;
+  box-sizing: border-box;
+  h1 {
+    font-family: "Oswald";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 43px;
+    line-height: 64px;
+    color: #ffffff;
+  }
 `;
