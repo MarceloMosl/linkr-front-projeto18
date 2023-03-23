@@ -7,9 +7,9 @@ import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.j
 import { CreateNewPost } from "../../components/CreateNewPost/CreateNewPost.js";
 import Header from "../../components/Header/Header.js";
 import UserContext from "../../contexts/UserContext.js";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export function Timeline() {
+export function Timeline(setRenderHashTag) {
 	const token = localStorage.getItem("token");
 	const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ export function Timeline() {
           <PostArea>
             <TimelineHeader />
             <CreateNewPost />
-            <DisplayPost/>
+            <DisplayPost setRenderHashTag={setRenderHashTag}/>
           </PostArea>
           <TrendingCard />
         </TimeLineBox>
