@@ -1,37 +1,42 @@
 import { HashTagsContainer, StyledLink } from "./styled";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { HashTags } from "./styled";
-import axios from "axios";
+import TimelineContext from "../../contexts/TimelineContext";
+import useFetchHashtag from "../hooks/fetchHashtags.js";
 
 export default function HashTagsList() {
-  const [hashTags, setHashTags] = useState([]);
-  const navigate = useNavigate;
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
-//   useEffect(getHashTagsList(), []);
+  const {
+    isResponseEdited,
+    setIsResponseEdited,
+    isPostDeleted,
+    setIsPostDeleted,
+    isPostCreated,
+    setIsPostCreated,
+  } = useContext(TimelineContext);
 
-  async function getHashTagsList() {
-    try {
-      const data = await axios.get(`${process.env.REACT_APP_API_URL}/hashtags`);
-
-      setHashTags(data);
-    } catch (error) {
-      alert(error.response);
-    }
-  }
-
+  const hashtagContent = useFetchHashtag(
+    token,
+    isResponseEdited,
+    isPostDeleted,
+    isPostCreated
+  );
+  
   function handleHashTagClick(clickedHashtag) {
     navigate(`/hashtag/${clickedHashtag}`);
   }
 
   return (
     <HashTagsContainer>
-      {hashTags.map((h) => (
+      {hashtagContent.map((h) => (
         <HashTags
           onClick={() => handleHashTagClick(h.name)}
           data-test="hashtag"
         >
-          <span># {h.name}</span>
+          <span>{h.name}</span>
         </HashTags>
       ))}
     </HashTagsContainer>
