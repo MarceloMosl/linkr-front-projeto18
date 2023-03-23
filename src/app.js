@@ -10,6 +10,7 @@ import UserContext from "./contexts/UserContext.js";
 import TimelineContext from "./contexts/TimelineContext.js";
 import { useState } from "react";
 import Header from "./components/Header/Header.js";
+import HashTagPage from "./pages/HashTagsPage/HashTagsPage.js";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
 						<Route path="/" element={<Login />} />
 						<Route path="/user/:id" element={<UserPage />} />
 						<Route path="/timeline" element={<Timeline />} />
+						<Route path="/hashtag/:hashtag" element={<HashTagPage/>}/>
 					</Routes>
 				</TimelineContext.Provider>
 			</UserContext.Provider>
