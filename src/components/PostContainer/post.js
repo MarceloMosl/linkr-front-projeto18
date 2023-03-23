@@ -87,7 +87,7 @@ export default function DisplayPost() {
       header
     );
 
-    promise.then((res) => console.log(res));
+    promise.then(() => window.location.reload());
     promise.catch((err) => alert(err));
   }
 
