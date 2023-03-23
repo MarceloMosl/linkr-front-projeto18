@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const HashTagsContainer = styled.div`
+export const HashTagsContainer = styled.a`
   margin-left: 16px;
   height: 293px;
+  border:none;
 `;
 
 export const HashTags = styled.div`
@@ -14,7 +15,6 @@ export const HashTags = styled.div`
     font-size: 19px;
     line-height: 23px;
     letter-spacing: 0.05em;
-
     color: #ffffff;
   }
 `;
