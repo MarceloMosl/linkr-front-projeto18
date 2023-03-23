@@ -67,7 +67,6 @@ export default function DisplayPost() {
       header
     );
     updatePromise.then((success) => {
-      console.log(success);
       setIsResponseEdited(success.data);
     });
     updatePromise.catch((error) => {
@@ -78,7 +77,6 @@ export default function DisplayPost() {
   }
 
   async function likePost(post) {
-    console.log(post);
     const header = { headers: { Authorization: `Bearer ${token}` } };
 
     const promise = axios.post(
