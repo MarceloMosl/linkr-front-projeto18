@@ -11,17 +11,15 @@ export function SearchUser({ userPosts }) {
   const { setHeaderStatus } = useContext(UserContext);
   setHeaderStatus(true);
   const token = localStorage.getItem("token");
+  console.log(token)
   const { id } = useParams();
   const [isFollowing, setIsFollowing]= useState (false);
 
   function handleFollow() {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const promise= axios.post(`${process.env.REACT_APP_API_URL}/user/${id}`,
-      config
+    const header = { headers: { Authorization: `Bearer ${token}` } };
+
+    const promise= axios.post(`${process.env.REACT_APP_API_URL}/user/${id}`, {},
+      header
     );
 
     promise.then((res) => {
