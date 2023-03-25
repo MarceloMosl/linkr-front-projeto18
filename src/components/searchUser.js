@@ -4,121 +4,146 @@ import UserContext from "../contexts/UserContext";
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-
-
+import TrendingCard from "./TrendingCard/TrendingCard";
+import {
+  PostContent,
+  StyledLikeContainer,
+  StyledLikeText,
+  StyledUserImg,
+  StyledUserName,
+} from "../pages/HashTagsPage/HashTagsPosts/styled";
+import { BodyPostMessageStyled } from "../pages/HashTagsPage/HashTagsPosts/HashTagsPosts";
+import PostMetadata from "./PostContainer/PostMetadata";
 
 export function SearchUser({ userPosts }) {
   const { setHeaderStatus } = useContext(UserContext);
   setHeaderStatus(true);
   const token = localStorage.getItem("token");
-  console.log(token)
+  console.log(token);
   const { id } = useParams();
-  const [isFollowing, setIsFollowing]= useState (false);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   function handleFollow() {
     const header = { headers: { Authorization: `Bearer ${token}` } };
 
-    const promise= axios.post(`${process.env.REACT_APP_API_URL}/user/${id}`, {},
+    const promise = axios.post(
+      `${process.env.REACT_APP_API_URL}/user/${id}`,
+      {},
       header
     );
 
     promise.then((res) => {
-      setIsFollowing(true)
+      setIsFollowing(true);
     });
     promise.catch((error) => {
-      alert("Ops! Algo não está certo, tente novamente!.")
+      alert("Ops! Algo não está certo, tente novamente!.");
       console.log(error);
-    }); 
+    });
+  }
 
-}
+  function handleUnfollow() {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const promise = axios.delete(
+      `${process.env.REACT_APP_API_URL}/user/${id}`,
+      config
+    );
 
-function handleUnfollow () {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const promise= axios.delete(`${process.env.REACT_APP_API_URL}/user/${id}`,
-    config
-  );
+    promise.then((res) => {
+      setIsFollowing(false);
+    });
+    promise.catch((error) => {
+      alert("Ops! Algo não está certo, tente novamente!.");
+      console.log(error);
+    });
+  }
 
-  promise.then((res) => {
-    setIsFollowing(false)
-  });
-  promise.catch((error) => {
-    alert("Ops! Algo não está certo, tente novamente!.")
-    console.log(error);
-  }); 
-
-}
-  
-
-
-
-  function Posts(a) {
+  function RenderPosts(p) {
     return (
-      <Post data-test="post">
-        <LikePfp>
-          <OpPfp src={a.user_url} />
-          <ion-icon
-            style={{ color: a.usuario_liked ? "red" : "" }}
+      <>
+        <Post key={p.id} postId={p.id} data-teste="post">
+          <StyledLikeContainer>
+            <StyledUserImg src={p.user_url} />
+            <ion-icon 
+            style={{ color: p.usuario_liked ? "red" : "" }}
             name="heart"
             size="small"
-          ></ion-icon>
-          <Like>{a.total_likes}LIKES</Like>
-        </LikePfp>
-        <PostText>
-          <OpName>{a.username}</OpName>
-          <PostMessage>{a.headline}</PostMessage>
-          <p>Url do Post: {a.post_url}</p>
-        </PostText>
-      </Post>
+            >
+            </ion-icon>
+            <StyledLikeText>{p.total_likes} LIKES</StyledLikeText>
+          </StyledLikeContainer>
+          <PostContent>
+            <PostText>
+              <StyledUserName data-teste="username">
+                {p.username}
+              </StyledUserName>
+              <PostMessage data-teste="description">
+                <BodyPostMessageStyled body={p.headline} />
+              </PostMessage>
+            </PostText>
+            <PostMetadata
+              title={p.title}
+              url={p.post_url}
+              description={p.description}
+              image={p.image}
+            />
+          </PostContent>
+        </Post>
+      </>
     );
   }
 
   return (
-    <All>
+    <MainContainer>
       <section>
         <img src={userPosts[0].user_url} alt="userPic" />
         <div>
-        <span>
-          {userPosts[0].username}
-          's posts
-          {isFollowing ? (
-            <UnfollowButton onClick={handleUnfollow}>Unfollow</UnfollowButton>
-          ) : (
-            <FollowButton onClick={handleFollow}>Follow</FollowButton>
-          )}
-        </span>
-      
-
-      </div>
+          <span>
+            {userPosts[0].username}
+            's posts
+            {isFollowing ? (
+              <UnfollowButton onClick={handleUnfollow}>Unfollow</UnfollowButton>
+            ) : (
+              <FollowButton onClick={handleFollow}>Follow</FollowButton>
+            )}
+          </span>
+        </div>
       </section>
-
-      {userPosts[0].headline === undefined
-        ? "No posts yet"
-        : userPosts.map((a) => Posts(a))}
-    </All>
+      <ContentBox>
+        <All>
+          <PostArea>
+            {userPosts[0].headline === undefined
+              ? "No posts yet"
+              : userPosts.map((p) => RenderPosts(p))}
+          </PostArea>
+        </All>
+        <TrendingCard />
+      </ContentBox>
+    </MainContainer>
   );
 }
-
-const All = styled.div`
+const MainContainer = styled.div`
   background-color: #4d4d4d;
   display: flex;
-  min-height: 100vh;
+  align-items: center;
   flex-direction: column;
+  min-height: 100vh;
 
   section {
     display: flex;
     width: 100%;
-    margin: auto;
+    /* margin: auto; */
     margin-left: 25%;
     margin-top: 85px;
     font-weight: 700;
     font-size: 43px;
     color: white;
-    align-items: center;
-    gap: 5px;
+    /* align-items: center; */
+    /* justify-content:center; */
+    /* gap: 5px; */
     img {
       width: 50px;
       height: 50px;
@@ -126,17 +151,53 @@ const All = styled.div`
     }
     div {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 5px;
+      /* flex-direction: column; */
+      /* align-items: flex-start; */
+      /* gap: 5px; */
       margin-left: 10px;
       font-size: 43px;
     }
   }
 `;
 
+const ContentBox = styled.div`
+  display: flex;
+  /* justify-content: space-between; */
+  width: 80vw;
+  margin-top: 32px;
+  /* margin: auto; */
+
+  @media (max-width: 950px) {
+    width: 100vw;
+  }
+`;
+
+const All = styled.div`
+  display: flex;
+
+  /* align-items: center; */
+
+  flex-direction: column;
+`;
+
+const PostArea = styled.div`
+  /* @media (max-width: 950px) {
+    margin: auto;
+  }
+  @media (max-width: 750px) {
+    margin: auto;
+    width: 100vw;
+  }
+  width: 70%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
 const Post = styled.div`
   display: flex;
+
   background-color: #171717;
   border-radius: 16px;
   width: 611px;
@@ -146,7 +207,7 @@ const Post = styled.div`
   padding-bottom: 20px;
   padding-right: 21px;
   box-sizing: border-box;
-  margin: auto;
+  /* margin: auto; */
   position: relative;
 `;
 const OpPfp = styled.img`
@@ -201,7 +262,7 @@ const LikePfp = styled.div`
 `;
 
 const FollowButton = styled.button`
-  background-color: #1877F2;
+  background-color: #1877f2;
   color: white;
   border: none;
   border-radius: 5px;
@@ -222,10 +283,10 @@ const FollowButton = styled.button`
 
 const UnfollowButton = styled.button`
   background-color: white;
-  color: #1877F2;
+  color: #1877f2;
   border: none;
   border-radius: 5px;
-  padding: 10px 30px;  
+  padding: 10px 30px;
   font-weight: bold;
   margin-left: 300px;
   font-size: 14px;

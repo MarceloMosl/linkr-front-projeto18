@@ -73,7 +73,7 @@ export default function RenderHashTagsPostsPosts() {
   );
 }
 
-function BodyPostMessageStyled({ body } ) {
+export function BodyPostMessageStyled({ body } ) {
   
     const tagStyle = {
       color: "white",

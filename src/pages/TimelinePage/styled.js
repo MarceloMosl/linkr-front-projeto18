@@ -12,6 +12,7 @@ export const TimeLineContainer = styled.div`
 
 export const TimeLineBox = styled.div`
   display: flex;
+  flex-direction:column;
   justify-content: space-between;
   width: 80vw;
   margin: auto;
@@ -20,3 +21,7 @@ export const TimeLineBox = styled.div`
     width: 100vw;
   }
 `;
+
+export const ContentBox = styled.div`
+display:flex;
+`

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import DisplayPost from "../../components/PostContainer/post.js";
 import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
-import { TimeLineBox, TimeLineContainer } from "./styled.js";
+import { ContentBox, TimeLineBox, TimeLineContainer } from "./styled.js";
 import { TimelineHeader } from "../../components/TimelineHeader/TimelineHeader.js";
 import { CreateNewPost } from "../../components/CreateNewPost/CreateNewPost.js";
 import Header from "../../components/Header/Header.js";
@@ -28,12 +28,14 @@ export function Timeline() {
       <Header />
       <TimeLineContainer>
         <TimeLineBox>
-          <PostArea>
-            <TimelineHeader />
-            <CreateNewPost />
-            <DisplayPost />
-          </PostArea>
-          <TrendingCard />
+          <TimelineHeader />
+          <ContentBox>
+            <PostArea>
+              <CreateNewPost />
+              <DisplayPost />
+            </PostArea>
+            <TrendingCard />
+          </ContentBox>
         </TimeLineBox>
       </TimeLineContainer>
     </>
