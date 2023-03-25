@@ -31,7 +31,7 @@ export default function HashTagsList() {
           onClick={() => handleHashTagClick(h.name)}
           data-test="hashtag"
         >
-          <span>{h.name}</span>
+          <span>#{h.name}</span>
         </HashTags>
       ))}
     </HashTagsContainer>

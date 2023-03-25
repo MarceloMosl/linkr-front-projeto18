@@ -5,6 +5,7 @@ export const TimeLineContainer = styled.div`
   justify-content: center;
   background-color: #4d4d4d;
   min-height: 100vh;
+  margin-top:30px;
 
   /* align-items: center; */
 `;
