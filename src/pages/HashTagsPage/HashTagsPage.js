@@ -41,7 +41,7 @@ export function HashTagHeader() {
   const {hashtag} = useParams()
   return (
     <HashTagHeaderContainer>
-     <h1>#{hashtag}</h1>
+     <h1 data-test = "hashtag-title">#{hashtag}</h1>
     </HashTagHeaderContainer>
   );
 }

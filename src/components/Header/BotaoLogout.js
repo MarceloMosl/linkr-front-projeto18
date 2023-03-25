@@ -11,8 +11,8 @@ function logOut() {
 }
 
 return (
-    <Container>
-        <btn onClick={logOut}>
+    <Container data-test = "menu">
+        <btn onClick={logOut}  data-test = "logout">
             Logout
         </btn>
     </Container>

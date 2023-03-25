@@ -44,7 +44,8 @@ export function CreateNewPost() {
       setIsPostCreated(false);
     });
     createPost.catch((err) => {
-      alert(err);
+      alert("There was an error publishing your link");
+      console.log(err)
       setIsLoading(false);
       setUrl("");
       setPostDescription("");
