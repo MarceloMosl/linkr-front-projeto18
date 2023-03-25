@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import useFetchHashtag from "../../../components/hooks/fetchHashtags";
-import TimelineContext from "../../../contexts/TimelineContext";
+
+import { useNavigate,useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import PostMetadata from "../../../components/PostContainer/PostMetadata";
 import {
   PostContainer,
@@ -19,21 +19,22 @@ import { ReactTagify } from "react-tagify";
 export default function RenderHashTagsPostsPosts() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const [hashtagContent, setHashtagContent] = useState([]);
+  const {hashtag} = useParams()
+  console.log(hashtag)
 
-  const {
-    isResponseEdited,
-    setIsResponseEdited,
-    isPostDeleted,
-    setIsPostDeleted,
-    isPostCreated,
-  } = useContext(TimelineContext);
+  useEffect(() => {
+		const URL = `${process.env.REACT_APP_API_URL}/hashtags/${hashtag}`;
+		const header = { headers: { Authorization: `Bearer ${token}` } };
+		const getRegistry = axios.get(URL, header);
+		getRegistry.then((response) => {
+			setHashtagContent(response.data);
+		});
+		getRegistry.catch((error) => {
+			console.log(error);
+		});
+	}, [token,hashtag]);
 
-  const hashtagContent = useFetchHashtag(
-    token,
-    isResponseEdited,
-    isPostDeleted,
-    isPostCreated
-  );
 
   return (
     <PostContainer>
