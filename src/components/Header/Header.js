@@ -69,7 +69,7 @@ export default function Header() {
           
           <div onClick={() => setTemBotao(!temBotao)} style={{ display: "flex", alignItems: "center" }}>
             <FiChevronDown style={{ marginRight: "5px", color:"white", fontSize:"30px" }}/>
-            <img alt="icon" src={user_url} style={{ marginRight: "30px" }} />
+            <img alt="icon" src={user_url} style={{ marginRight: "30px" }}  data-test="avatar"/>
           </div>
           
          
