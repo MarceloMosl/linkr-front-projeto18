@@ -10,7 +10,7 @@ import {
 } from "./styled";
 import axios from "axios";
 import TimelineContext from "../../contexts/TimelineContext";
-import { ThreeDots } from "react-loader-spinner";
+
 
 export function CreateNewPost() {
   const [link, setUrl] = useState("");
@@ -81,7 +81,7 @@ export function CreateNewPost() {
             required
           />
           <button type="submit" disabled={isLoading} data-test="publish-btn">
-            {isLoading ? <ThreeDots width={50} color="#FFFFFF" /> : "Publicar"}
+            {isLoading ? "Publishing..." : "Publicar"}
           </button>
         </StyledForm>
       </PostBox>

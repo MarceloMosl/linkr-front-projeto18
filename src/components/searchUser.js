@@ -48,12 +48,12 @@ const All = styled.div`
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  margin-top:20px;
 
   section {
     display: flex;
     width: 611px;
     margin: auto;
-    margin-top: 80px;
     font-weight: 700;
     font-size: 43px;
     color: white;

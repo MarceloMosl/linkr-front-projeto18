@@ -16,5 +16,6 @@ export const HashTags = styled.div`
     line-height: 23px;
     letter-spacing: 0.05em;
     color: #ffffff;
+    cursor:pointer;
   }
 `;
