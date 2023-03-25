@@ -1,10 +1,62 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
+import axios from "axios";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+
+
 
 export function SearchUser({ userPosts }) {
   const { setHeaderStatus } = useContext(UserContext);
   setHeaderStatus(true);
+  const token = localStorage.getItem("token");
+  const { id } = useParams();
+  const [isFollowing, setIsFollowing]= useState (false);
+
+  function handleFollow() {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const promise= axios.post(`${process.env.REACT_APP_API_URL}/user/${id}`,
+      config
+    );
+
+    promise.then((res) => {
+      setIsFollowing(true)
+    });
+    promise.catch((error) => {
+      alert("Ops! Algo não está certo, tente novamente!.")
+      console.log(error);
+    }); 
+
+}
+
+function handleUnfollow () {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise= axios.delete(`${process.env.REACT_APP_API_URL}/user/${id}`,
+    config
+  );
+
+  promise.then((res) => {
+    setIsFollowing(false)
+  });
+  promise.catch((error) => {
+    alert("Ops! Algo não está certo, tente novamente!.")
+    console.log(error);
+  }); 
+
+}
+  
+
+
+
   function Posts(a) {
     return (
       <Post data-test="post">
@@ -30,10 +82,19 @@ export function SearchUser({ userPosts }) {
     <All>
       <section>
         <img src={userPosts[0].user_url} alt="userPic" />
+        <div>
         <span>
           {userPosts[0].username}
           's posts
+          {isFollowing ? (
+            <UnfollowButton onClick={handleUnfollow}>Unfollow</UnfollowButton>
+          ) : (
+            <FollowButton onClick={handleFollow}>Follow</FollowButton>
+          )}
         </span>
+      
+
+      </div>
       </section>
 
       {userPosts[0].headline === undefined
@@ -48,12 +109,13 @@ const All = styled.div`
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  margin-top:20px;
 
   section {
     display: flex;
-    width: 611px;
+    width: 100%;
     margin: auto;
+    margin-left: 25%;
+    margin-top: 85px;
     font-weight: 700;
     font-size: 43px;
     color: white;
@@ -63,6 +125,14 @@ const All = styled.div`
       width: 50px;
       height: 50px;
       border-radius: 50%;
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+      margin-left: 10px;
+      font-size: 43px;
     }
   }
 `;
@@ -129,5 +199,45 @@ const LikePfp = styled.div`
   ion-icon {
     color: {
     }
+  }
+`;
+
+const FollowButton = styled.button`
+  background-color: #1877F2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font-weight: bold;
+  margin-left: 300px;
+  cursor: pointer;
+  font-size: 14px;
+
+  &:hover {
+    background-color: #1864ab;
+  }
+
+  &:active {
+    background-color: #0e3a64;
+  }
+`;
+
+const UnfollowButton = styled.button`
+  background-color: white;
+  color: #1877F2;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 30px;  
+  font-weight: bold;
+  margin-left: 300px;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1864ab;
+  }
+
+  &:active {
+    background-color: #0e3a64;
   }
 `;
