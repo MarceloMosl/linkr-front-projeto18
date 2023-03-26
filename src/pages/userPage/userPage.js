@@ -15,7 +15,6 @@ export function UserPage() {
     const URL =  `${process.env.REACT_APP_API_URL}/user/${id}`;
     const header = { headers: { Authorization: `Bearer ${token}` } };
     const response = axios.get( URL,header); 
-    console.log(response)
 
     response.then((res) => setUserPosts(res.data));
 

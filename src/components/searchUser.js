@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
 import axios from "axios";
+import { useEffect } from 'react';
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import TrendingCard from "./TrendingCard/TrendingCard";
@@ -17,11 +18,31 @@ import PostMetadata from "./PostContainer/PostMetadata";
 
 export function SearchUser({ userPosts }) {
   const { setHeaderStatus } = useContext(UserContext);
-  setHeaderStatus(true);
   const token = localStorage.getItem("token");
-  console.log(token);
   const { id } = useParams();
-  const [isFollowing, setIsFollowing] = useState(false);
+  const [isFollowing, setIsFollowing] = useState("");
+
+
+  useEffect(() => {
+    setHeaderStatus(true);
+
+    const header = { headers: { Authorization: `Bearer ${token}` } };
+
+    axios.get(`${process.env.REACT_APP_API_URL}/follow/${id}`, header)
+
+      .then((res) => {
+        if (res.data.length===0) {
+        setIsFollowing(false);
+        }else {
+          setIsFollowing (true);
+        }
+      })
+      .catch((error) => {
+        alert("Ops! Algo não está certo, tente novamente!.");
+        console.log(error);
+      });
+  }, [id, setHeaderStatus, token]);
+  
 
   function handleFollow() {
     const header = { headers: { Authorization: `Bearer ${token}` } };
@@ -104,11 +125,14 @@ export function SearchUser({ userPosts }) {
           <span>
             {userPosts[0].username}
             's posts
+            
             {isFollowing ? (
               <UnfollowButton onClick={handleUnfollow}>Unfollow</UnfollowButton>
             ) : (
               <FollowButton onClick={handleFollow}>Follow</FollowButton>
             )}
+
+
           </span>
         </div>
       </section>
