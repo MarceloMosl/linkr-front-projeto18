@@ -124,9 +124,11 @@ export function SearchUser({ userPosts }) {
             {userPosts[0].username}
             's posts
             {isFollowing ? (
-              <UnfollowButton onClick={handleUnfollow}>Unfollow</UnfollowButton>
+              <UnfollowButton onClick={() => handleUnfollow()}>
+                Unfollow
+              </UnfollowButton>
             ) : (
-              <FollowButton onClick={handleFollow}>Follow</FollowButton>
+              <FollowButton onClick={() => handleFollow()}>Follow</FollowButton>
             )}
           </span>
         </div>
