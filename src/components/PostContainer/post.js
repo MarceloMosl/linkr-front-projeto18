@@ -15,6 +15,7 @@ export default function DisplayPost(setRenderHashTag) {
   const token = localStorage.getItem("token");
   const [editingPostId, setEditingPostId] = useState(null);
   const [editedMessage, setEditedMessage] = useState("");
+  const [statelikePost, setLikePost] = useState([]);
 
   const {
     isResponseEdited,
@@ -28,7 +29,8 @@ export default function DisplayPost(setRenderHashTag) {
     token,
     isResponseEdited,
     isPostDeleted,
-    isPostCreated
+    isPostCreated,
+    statelikePost
   );
 
   function handleEditClick(postId) {
@@ -88,6 +90,20 @@ export default function DisplayPost(setRenderHashTag) {
     promise.catch((err) => alert(err));
   }
 
+  async function sharePost(post) {
+    const header = { headers: { Authorization: `Bearer ${token}` } };
+
+    console.log(post);
+    const promise = axios.post(
+      `${process.env.REACT_APP_API_URL}/posts`,
+      { link: post.post_url, description: post.headline },
+      header
+    );
+
+    promise.then(() => window.location.reload());
+    promise.catch((err) => alert(err));
+  }
+
   return (
     <Main>
       {timelineContent.length === 0 ? (
@@ -105,7 +121,13 @@ export default function DisplayPost(setRenderHashTag) {
                 name="heart-outline"
                 size="small"
               ></ion-icon>
-              <Like>{obj.total_likes} LIKES</Like>
+              <p>{obj.total_likes} LIKES</p>
+              <ion-icon
+                onClick={() => sharePost(obj)}
+                name="repeat-outline"
+                size="small"
+              ></ion-icon>
+              <p>{obj.total_likes} shares</p>
             </LikePfp>
 
             <PostContent>
@@ -130,7 +152,10 @@ export default function DisplayPost(setRenderHashTag) {
                   </EditInput>
                 ) : (
                   <PostMessage data-teste="description">
-                    <BodyPostMessageStyled body={obj.headline} setRenderHashTag={setRenderHashTag} />
+                    <BodyPostMessageStyled
+                      body={obj.headline}
+                      setRenderHashTag={setRenderHashTag}
+                    />
                   </PostMessage>
                 )}
               </PostText>
@@ -162,15 +187,13 @@ export default function DisplayPost(setRenderHashTag) {
 
 const Main = styled.div`
   gap: 15px;
-
   p {
     font-family: "Oswald";
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
     line-height: 36px;
     text-align: center;
-
+    font-size: 17px;
     color: #ffffff;
   }
 `;
@@ -223,15 +246,13 @@ const PostMessage = styled.div`
   margin-top: 8px;
   word-break: break-all;
 `;
-const Like = styled.p`
-  margin-top: 4px;
-`;
 const LikePfp = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 11px;
+  font-size: 10px;
   align-items: center;
   color: #ffffff;
+  cursor: pointer;
 `;
 
 const IconHolder = styled.div`
@@ -273,14 +294,17 @@ function BodyPostMessageStyled({ body }, setRenderHashTag) {
     cursor: "pointer",
   };
 
-  function handleClick(tag,setRenderHashTag) {
+  function handleClick(tag, setRenderHashTag) {
     const tagName = tag.substring(1);
     navigate(`/hashtag/${tagName}`);
-    setRenderHashTag(tagName)
+    setRenderHashTag(tagName);
   }
 
   return (
-    <ReactTagify tagStyle={tagStyle} tagClicked={(tag) => handleClick(tag,setRenderHashTag)}>
+    <ReactTagify
+      tagStyle={tagStyle}
+      tagClicked={(tag) => handleClick(tag, setRenderHashTag)}
+    >
       <p>{typeof body === "string" ? body : JSON.stringify(body)}</p>
     </ReactTagify>
   );

@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-function PostDelete({ id, setIsPostDeleted, isPostDeleted }) {
+function PostDelete({ id, setIsPostDeleted }) {
   const token = localStorage.getItem("token");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const iconRef = useRef(null);

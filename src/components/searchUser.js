@@ -48,6 +48,7 @@ const All = styled.div`
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  gap: 20px;
 
   section {
     display: flex;
