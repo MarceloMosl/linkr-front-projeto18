@@ -22,7 +22,7 @@ function App() {
 	const [isResponseEdited, setIsResponseEdited] = useState(false);
 	const [isPostDeleted, setIsPostDeleted] = useState(false);
 	const [isPostCreated, setIsPostCreated] = useState(false);
-	const [renderHashTag, setRenderHashTag] = useState("")
+	
 
 	return (
 		<BrowserRouter>
@@ -48,8 +48,8 @@ function App() {
 						<Route path="/sign-up" element={<SignUp />} />
 						<Route path="/" element={<Login />} />
 						<Route path="/user/:id" element={<UserPage />} />
-						<Route path="/timeline" element={<Timeline setRenderHashTag={setRenderHashTag}/>} />
-						<Route path="/hashtag/:hashtag" element={<HashTagPage renderHashTag={renderHashTag} />}/>
+						<Route path="/timeline" element={<Timeline />} />
+						<Route path="/hashtag/:hashtag" element={<HashTagPage />}/>
 					</Routes>
 				</TimelineContext.Provider>
 			</UserContext.Provider>

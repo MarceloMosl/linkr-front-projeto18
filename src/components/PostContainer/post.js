@@ -10,7 +10,7 @@ import useFetchTimeline from "../hooks/fetchTimeline.js";
 import TimelineContext from "../../contexts/TimelineContext";
 import PostMetadata from "./PostMetadata";
 
-export default function DisplayPost(setRenderHashTag) {
+export default function DisplayPost() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [editingPostId, setEditingPostId] = useState(null);
@@ -152,10 +152,7 @@ export default function DisplayPost(setRenderHashTag) {
                   </EditInput>
                 ) : (
                   <PostMessage data-teste="description">
-                    <BodyPostMessageStyled
-                      body={obj.headline}
-                      setRenderHashTag={setRenderHashTag}
-                    />
+                    <BodyPostMessageStyled body={obj.headline} />
                   </PostMessage>
                 )}
               </PostText>
@@ -285,7 +282,7 @@ const PencilIcon = styled(IoPencil)`
   cursor: pointer;
 `;
 
-function BodyPostMessageStyled({ body }, setRenderHashTag) {
+function BodyPostMessageStyled({ body }) {
   const navigate = useNavigate();
 
   const tagStyle = {
@@ -294,17 +291,14 @@ function BodyPostMessageStyled({ body }, setRenderHashTag) {
     cursor: "pointer",
   };
 
-  function handleClick(tag, setRenderHashTag) {
+  function handleClick(tag) {
     const tagName = tag.substring(1);
+
     navigate(`/hashtag/${tagName}`);
-    setRenderHashTag(tagName);
   }
 
   return (
-    <ReactTagify
-      tagStyle={tagStyle}
-      tagClicked={(tag) => handleClick(tag, setRenderHashTag)}
-    >
+    <ReactTagify tagStyle={tagStyle} tagClicked={(tag) => handleClick(tag)}>
       <p>{typeof body === "string" ? body : JSON.stringify(body)}</p>
     </ReactTagify>
   );

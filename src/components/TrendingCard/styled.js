@@ -9,7 +9,7 @@ export const TrendingContainer = styled.div`
   height: 406px;
   background: #171717;
   border-radius: 16px;
-  margin-top: 152px;
+  /* margin-top: 152px; */
   margin-left: 26px;
 
   h1 {
@@ -24,14 +24,13 @@ export const TrendingContainer = styled.div`
     color: #ffffff;
   }
 
-  div {
-    width: 100%;
-    border: 1px solid #484848;
-    margin-bottom: 22px;
-  }
-
   /* @media (min-width:375px) {
     display:none;
 
   } */
+`;
+
+export const DivisorLine = styled.div`
+  width: 100%;
+  border: 1px solid #484848;
 `;

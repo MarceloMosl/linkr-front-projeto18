@@ -43,6 +43,7 @@ export const PostArea = styled.div`
     margin: auto;
     width: 100vw;
   }
+  
   width: 70%;
 `;
 

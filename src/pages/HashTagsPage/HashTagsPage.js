@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import UserContext from "../../contexts/UserContext.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import {
   HashTagContainer,
   HashTagBox,
@@ -8,8 +8,9 @@ import {
   PostArea,
 } from "./styled.js";
 import TrendingCard from "../../components/TrendingCard/TrendingCard.js";
+import RenderHashTagsPostsPosts from "./HashTagsPosts/HashTagsPosts.js";
 
-export default function HashTagPage(renderHashTag) {
+export default function HashTagPage() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
@@ -27,7 +28,8 @@ export default function HashTagPage(renderHashTag) {
     <HashTagContainer>
       <HashTagBox>
         <PostArea>
-          <HashTagHeader renderHashTag={renderHashTag}/>
+          <HashTagHeader />
+          <RenderHashTagsPostsPosts/>
         </PostArea>
         <TrendingCard/>
       </HashTagBox>
@@ -35,10 +37,11 @@ export default function HashTagPage(renderHashTag) {
   );
 }
 
-export function HashTagHeader(renderHashTag) {
+export function HashTagHeader() {
+  const {hashtag} = useParams()
   return (
     <HashTagHeaderContainer>
-     <h1>{JSON.stringify(renderHashTag)}</h1>
+     <h1 data-test = "hashtag-title">#{hashtag}</h1>
     </HashTagHeaderContainer>
   );
 }

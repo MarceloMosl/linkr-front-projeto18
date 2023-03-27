@@ -32,10 +32,11 @@ function PostDelete({ id, setIsPostDeleted }) {
 
   return (
     <div>
-      <IoTrashOutline
+      <StyledTrashIcon
         ref={iconRef}
         onClick={handleIconClick}
         data-text="delete-btn"
+        
       />
       {isModalOpen && (
         <ModalContainer
@@ -125,3 +126,7 @@ const ButtonContainer = styled.div`
   width: 100%;
   margin-top: 20px;
 `;
+
+const StyledTrashIcon = styled(IoTrashOutline)`
+cursor:pointer;
+`
